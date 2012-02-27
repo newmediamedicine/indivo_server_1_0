@@ -1,0 +1,8 @@
+Welcome to Indivo, {{ full_name }}!
+
+Your account {{ account.contact_email }} has been activated. Please choose a username and password so you can login to your account here:
+{{ url_prefix }}/accounts/{{ account.email }}/init/{{ account.primary_secret }}
+
+
+If you are having trouble accessing your account, you can contact us via email:
+{{ email_support_name }} <{{ email_support_address }}>
