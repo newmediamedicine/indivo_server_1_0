@@ -1,0 +1,8 @@
+{% load template_utils %}<VideoMessage xmlns="http://indivo.org/vocab/xml/documents#">
+  <fileId>{{ fobj.file_id }}</fileId>
+  <storageType>{{ fobj.storage_type }}</storageType>
+  <subject>{{ fobj.subject }}</subject>
+  <from>{{ fobj.from_str }}</from>
+  <dateRecorded>{{ fobj.date_recorded|format_iso8601_datetime }}</dateRecorded>
+  <dateSent>{{ fobj.date_sent|format_iso8601_datetime }}</dateSent>
+</VideoMessage>

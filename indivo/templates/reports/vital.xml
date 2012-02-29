@@ -1,21 +1,31 @@
 {% load template_utils %}<VitalSign xmlns="http://indivo.org/vocab/xml/documents#">
-  {% if fobj.date_measured %}
-  <dateMeasured>{{ fobj.date_measured|format_iso8601_datetime }}</dateMeasured>
-  {% endif %}
-  {% if fobj.name %}
   <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+  {% if fobj.measured_by %}
+  <measuredBy>{{ fobj.measured_by }}</measuredBy>
   {% endif %}
-  {% if fobj.value %}
-  <value>{{ fobj.value }}</value>
+  <dateMeasuredStart>{{ fobj.date_measured_start|format_iso8601_datetime }}</dateMeasuredStart>
+  {% if fobj.date_measured_end %}
+  <dateMeasuredEnd>{{ fobj.date_measured_end|format_iso8601_datetime }}</dateMeasuredEnd>
   {% endif %}
-  {% if fobj.unit %}
-  <unit{% if fobj.unit_type %} type="{{ fobj.unit_type }}" value="{{ fobj.unit_value }}"{% if fobj.unit_abbrev %} abbrev="{{ fobj.unit_abbrev }}"{% endif %}{% endif %}>{{ fobj.unit }}</unit>
-  {% endif %}
+  <result>
+    {% if fobj.result_value %}
+    <value>{{ fobj.result_value }}</value>
+    {% endif %}
+    {% if fobj.result_textvalue %}
+    <textValue>{{ fobj.result_textvalue }}</textValue>
+    {% endif %}
+    {% if fobj.result_unit %}
+    <unit{% if fobj.result_unit_type %} type="{{ fobj.result_unit_type }}" value="{{ fobj.result_unit_value }}"{% if fobj.result_unit_abbrev %} abbrev="{{ fobj.result_unit_abbrev }}"{% endif %}{% endif %}>{{ fobj.result_unit }}</unit>
+    {% endif %}
+  </result>
   {% if fobj.site %}
   <site>{{ fobj.site }}</site>
   {% endif %}
   {% if fobj.position %}
   <position>{{ fobj.position }}</position>
+  {% endif %}
+  {% if fobj.technique %}
+  <technique>{{ fobj.technique }}</technique>
   {% endif %}
   {% if fobj.comments %}
   <comments>{{ fobj.comments }}</comments>

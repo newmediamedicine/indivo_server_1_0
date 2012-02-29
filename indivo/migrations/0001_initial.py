@@ -205,6 +205,7 @@ class Migration(SchemaMigration):
             ('received_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('read_at', self.gf('django.db.models.fields.DateTimeField')(null=True)),
             ('archived_at', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('sent_archived_at', self.gf('django.db.models.fields.DateTimeField')(null=True)),
             ('response_to', self.gf('django.db.models.fields.related.ForeignKey')(related_name='message_responses', null=True, to=orm['indivo.Message'])),
             ('num_attachments', self.gf('django.db.models.fields.IntegerField')(default=0)),
         ))
@@ -615,21 +616,183 @@ class Migration(SchemaMigration):
         # Adding model 'Vitals'
         db.create_table('indivo_vitals', (
             ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
-            ('date_measured', self.gf('django.db.models.fields.DateTimeField')(null=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('name_type', self.gf('django.db.models.fields.CharField')(max_length=80, null=True)),
             ('name_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
             ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
-            ('value', self.gf('django.db.models.fields.FloatField')()),
-            ('unit', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('unit_type', self.gf('django.db.models.fields.CharField')(max_length=80, null=True)),
-            ('unit_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
-            ('unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('measured_by', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('date_measured_start', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('date_measured_end', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('result_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('result_textvalue', self.gf('django.db.models.fields.CharField')(max_length=5000, null=True)),
+            ('result_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('result_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('result_unit_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('result_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
             ('site', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
             ('position', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('technique', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
             ('comments', self.gf('django.db.models.fields.TextField')(null=True)),
         ))
         db.send_create_signal('indivo', ['Vitals'])
+
+        # Adding model 'AdherenceItem'
+        db.create_table('indivo_adherenceitem', (
+            ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('reported_by', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('date_reported', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('recurrence_index', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('adherence', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('nonadherence_reason', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+        ))
+        db.send_create_signal('indivo', ['AdherenceItem'])
+
+        # Adding model 'EquipmentScheduleItem'
+        db.create_table('indivo_equipmentscheduleitem', (
+            ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('scheduled_by', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('date_scheduled', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('date_start', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('date_end', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('recurrencerule_frequency', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('recurrencerule_frequency_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_frequency_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_frequency_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('recurrencerule_interval', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_interval_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_interval_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_interval_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('recurrencerule_dateuntil', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('recurrencerule_count', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('instructions', self.gf('django.db.models.fields.TextField')()),
+        ))
+        db.send_create_signal('indivo', ['EquipmentScheduleItem'])
+
+        # Adding model 'MedicationAdministration'
+        db.create_table('indivo_medicationadministration', (
+            ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('reported_by', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('date_reported', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('date_administered', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('amountadministered_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('amountadministered_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('amountadministered_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('amountadministered_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('amountadministered_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('amountadministered_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('amountremaining_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('amountremaining_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('amountremaining_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('amountremaining_unit_type', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('amountremaining_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('amountremaining_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+        ))
+        db.send_create_signal('indivo', ['MedicationAdministration'])
+
+        # Adding model 'MedicationFill'
+        db.create_table('indivo_medicationfill', (
+            ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('filled_by', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('date_filled', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('amountfilled_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('amountfilled_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('amountfilled_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('amountfilled_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('amountfilled_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('amountfilled_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('ndc', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('ndc_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('ndc_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('ndc_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('fill_sequence_number', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('lot_number', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('refills_remaining', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('instructions', self.gf('django.db.models.fields.TextField')(null=True)),
+        ))
+        db.send_create_signal('indivo', ['MedicationFill'])
+
+        # Adding model 'MedicationOrder'
+        db.create_table('indivo_medicationorder', (
+            ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('order_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('ordered_by', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('date_ordered', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('date_expires', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('indication', self.gf('django.db.models.fields.TextField')()),
+            ('amountordered_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('amountordered_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('amountordered_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('amountordered_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('amountordered_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('amountordered_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('refills', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('substitution_permitted', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('instructions', self.gf('django.db.models.fields.TextField')()),
+        ))
+        db.send_create_signal('indivo', ['MedicationOrder'])
+
+        # Adding model 'MedicationScheduleItem'
+        db.create_table('indivo_medicationscheduleitem', (
+            ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('scheduled_by', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('date_scheduled', self.gf('django.db.models.fields.DateTimeField')()),
+            ('date_start', self.gf('django.db.models.fields.DateTimeField')()),
+            ('date_end', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('recurrencerule_frequency', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('recurrencerule_frequency_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_frequency_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_frequency_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('recurrencerule_interval', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_interval_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_interval_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('recurrencerule_interval_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('recurrencerule_dateuntil', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('recurrencerule_count', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('dose_textvalue', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('dose_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('dose_unit', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('dose_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('dose_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('dose_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('instructions', self.gf('django.db.models.fields.TextField')()),
+        ))
+        db.send_create_signal('indivo', ['MedicationScheduleItem'])
+
+        # Adding model 'VideoMessage'
+        db.create_table('indivo_videomessage', (
+            ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('file_id', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('storage_type', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('subject', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('from_str', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('date_recorded', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('date_sent', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+        ))
+        db.send_create_signal('indivo', ['VideoMessage'])
 
 
     def backwards(self, orm):
@@ -786,6 +949,27 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Vitals'
         db.delete_table('indivo_vitals')
+
+        # Deleting model 'AdherenceItem'
+        db.delete_table('indivo_adherenceitem')
+
+        # Deleting model 'EquipmentScheduleItem'
+        db.delete_table('indivo_equipmentscheduleitem')
+
+        # Deleting model 'MedicationAdministration'
+        db.delete_table('indivo_medicationadministration')
+
+        # Deleting model 'MedicationFill'
+        db.delete_table('indivo_medicationfill')
+
+        # Deleting model 'MedicationOrder'
+        db.delete_table('indivo_medicationorder')
+
+        # Deleting model 'MedicationScheduleItem'
+        db.delete_table('indivo_medicationscheduleitem')
+
+        # Deleting model 'VideoMessage'
+        db.delete_table('indivo_videomessage')
 
 
     models = {
@@ -1100,6 +1284,7 @@ class Migration(SchemaMigration):
             'recipient': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'message_as_recipient'", 'to': "orm['indivo.Principal']"}),
             'response_to': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'message_responses'", 'null': 'True', 'to': "orm['indivo.Message']"}),
             'sender': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'message_as_sender'", 'to': "orm['indivo.Principal']"}),
+            'sent_archived_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'severity': ('django.db.models.fields.CharField', [], {'default': "'low'", 'max_length': '100'}),
             'subject': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
@@ -1284,19 +1469,167 @@ class Migration(SchemaMigration):
         'indivo.vitals': {
             'Meta': {'object_name': 'Vitals', '_ormbases': ['indivo.Fact']},
             'comments': ('django.db.models.fields.TextField', [], {'null': 'True'}),
-            'date_measured': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'date_measured_start': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'date_measured_end': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'measured_by': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
             'name_type': ('django.db.models.fields.CharField', [], {'max_length': '80', 'null': 'True'}),
             'name_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
             'position': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
             'site': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
-            'unit': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
-            'unit_type': ('django.db.models.fields.CharField', [], {'max_length': '80', 'null': 'True'}),
-            'unit_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
-            'value': ('django.db.models.fields.FloatField', [], {})
+            'result_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'result_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'result_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'result_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'result_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '5000', 'null': 'True'}),
+            'result_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'technique': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'})
+        },
+        'indivo.adherenceitem': {
+            'Meta': {'object_name': 'AdherenceItem', '_ormbases': ['indivo.Fact']},
+            'adherence': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'date_reported': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'nonadherence_reason': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrence_index': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'reported_by': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+        },
+        'indivo.equipmentscheduleitem': {
+            'Meta': {'object_name': 'EquipmentScheduleItem', '_ormbases': ['indivo.Fact']},
+            'date_end': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'date_start': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'date_scheduled': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'instructions': ('django.db.models.fields.TextField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrencerule_count': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'recurrencerule_dateuntil': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'recurrencerule_frequency': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'recurrencerule_frequency_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'recurrencerule_frequency_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrencerule_frequency_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrencerule_interval': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrencerule_interval_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'recurrencerule_interval_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrencerule_interval_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'scheduled_by': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+        },
+        'indivo.medicationadministration': {
+            'Meta': {'object_name': 'MedicationAdministration', '_ormbases': ['indivo.Fact']},
+            'amountadministered_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountadministered_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'amountadministered_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'amountadministered_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountadministered_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'amountadministered_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountremaining_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'amountremaining_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountremaining_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'amountremaining_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'amountremaining_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountremaining_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'date_reported': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'date_administered': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'reported_by': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+        },
+        'indivo.medicationfill': {
+            'Meta': {'object_name': 'MedicationFill', '_ormbases': ['indivo.Fact']},
+            'amountfilled_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountfilled_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'amountfilled_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountfilled_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'amountfilled_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountfilled_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'date_filled': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'filled_by': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'fill_sequence_number': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'instructions': ('django.db.models.fields.TextField', [], {'null': 'True'}),
+            'lot_number': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'ndc': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'ndc_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'ndc_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'ndc_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'refills_remaining': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+        },
+        'indivo.medicationorder': {
+            'Meta': {'object_name': 'MedicationOrder', '_ormbases': ['indivo.Fact']},
+            'amountordered_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountordered_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'amountordered_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountordered_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'amountordered_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'amountordered_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'date_expires': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'date_ordered': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'indication': ('django.db.models.fields.TextField', [], {}),
+            'instructions': ('django.db.models.fields.TextField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'order_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'ordered_by': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'refills': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'substitution_permitted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+        },
+        'indivo.medicationscheduleitem': {
+            'Meta': {'object_name': 'MedicationScheduleItem', '_ormbases': ['indivo.Fact']},
+            'date_end': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'date_scheduled': ('django.db.models.fields.DateTimeField', [], {}),
+            'date_start': ('django.db.models.fields.DateTimeField', [], {}),
+            'dose_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'dose_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'dose_unit': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'dose_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'dose_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'dose_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'instructions': ('django.db.models.fields.TextField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'recurrencerule_count': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'recurrencerule_dateuntil': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'recurrencerule_frequency': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'recurrencerule_frequency_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'recurrencerule_frequency_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrencerule_frequency_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrencerule_interval': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrencerule_interval_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'recurrencerule_interval_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'recurrencerule_interval_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'scheduled_by': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+        },
+        'indivo.videomessage': {
+            'Meta': {'object_name': 'VideoMessage', '_ormbases': ['indivo.Fact']},
+            'date_recorded': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'date_sent': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'file_id': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'from_str': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'storage_type': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'subject': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
         }
     }
 

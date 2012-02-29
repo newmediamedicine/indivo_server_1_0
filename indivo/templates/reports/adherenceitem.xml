@@ -1,0 +1,12 @@
+{% load template_utils %}<AdherenceItem xmlns="http://indivo.org/vocab/xml/documents#">
+  <name>{{ fobj.name }}</name>
+  <reportedBy>{{ fobj.reported_by }}</reportedBy>
+  <dateReported>{{ fobj.date_reported|format_iso8601_datetime }}</dateReported>
+  {% if fobj.recurrence_index %}
+    <recurrenceIndex>{{ fobj.recurrence_index }}</recurrenceIndex>
+  {% endif %}
+  <adherence>{{ fobj.adherence }}</adherence>
+  {% if fobj.recurrence_index %}
+    <nonadherenceReason>{{ fobj.nonadherence_reason }}</nonadherenceReason>
+  {% endif %}
+</AdherenceItem>

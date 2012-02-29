@@ -1,0 +1,34 @@
+{% load template_utils %}<MedicationAdministration xmlns="http://indivo.org/vocab/xml/documents#">
+  <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+  <reportedBy>{{ fobj.reported_by }}</reportedBy>
+  <dateReported>{{ fobj.date_reported|format_iso8601_datetime }}</dateReported>
+  {% if fobj.date_administered %}
+  <dateAdministered>{{ fobj.date_administered|format_iso8601_datetime }}</dateAdministered>
+  {% endif %}
+  {% if fobj.amountadministered_value or fobj.amountadministered_textvalue %}
+  <amountAdministered>
+    {% if fobj.amountadministered_value %}
+    <value>{{ fobj.amountadministered_value }}</value>
+    {% endif %}
+    {% if fobj.amountadministered_textvalue %}
+    <textValue>{{ fobj.amountadministered_textvalue }}</textValue>
+    {% endif %}
+    {% if fobj.amountadministered_unit %}
+    <unit{% if fobj.amountadministered_unit_type %} type="{{ fobj.amountadministered_unit_type }}" value="{{ fobj.amountadministered_unit_value }}"{% if fobj.amountadministered_unit_abbrev %} abbrev="{{ fobj.amountadministered_unit_abbrev }}"{% endif %}{% endif %}>{{ fobj.amountadministered_unit }}</unit>
+    {% endif %}
+  </amountAdministered>
+  {% endif %}
+  {% if fobj.amountremaining_value or fobj.amountremaining_textvalue %}
+  <amountRemaining>
+    {% if fobj.amountremaining_value %}
+    <value>{{ fobj.amountremaining_value }}</value>
+    {% endif %}
+    {% if fobj.amountremaining_textvalue %}
+    <textValue>{{ fobj.amountremaining_textvalue }}</textValue>
+    {% endif %}
+    {% if fobj.amountremaining_unit %}
+    <unit{% if fobj.amountremaining_unit_type %} type="{{ fobj.amountremaining_unit_type }}" value="{{ fobj.amountremaining_unit_value }}"{% if fobj.amountremaining_unit_abbrev %} abbrev="{{ fobj.amountremaining_unit_abbrev }}"{% endif %}{% endif %}>{{ fobj.amountremaining_unit }}</unit>
+    {% endif %}
+  </amountRemaining>
+  {% endif %}
+</MedicationAdministration>

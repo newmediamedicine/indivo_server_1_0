@@ -5,7 +5,8 @@ from django.template import Context, loader
 from django.template.defaultfilters import stringfilter
 from indivo.models import Document
 from indivo.lib import iso8601
-from indivo.views.documents.document import _set_doc_latest, _get_doc_relations
+from indivo.views.base import *
+from indivo.views.documents.document import _set_doc_latest, _get_doc_relations, _get_document
 
 register = template.Library()
 
@@ -34,6 +35,18 @@ def get_doc_obj(doc_id):
   except:
     return ""
 get_doc_obj.is_safe = True
+
+@register.filter
+@stringfilter
+def get_doc_obj_rels(doc_id):
+  print doc_id
+  try:
+    document = Document.objects.get(id=doc_id)
+    document.relates_to, document.is_related_from = _get_doc_relations(document)
+    return loader.get_template('document.xml').render(Context({'doc':document}))
+  except Exception, e:
+    return "Exception: " + str(e)
+get_doc_obj_rels.is_safe = True
 
 # this is definitely not a string filter, it should be a real timestamp
 @register.filter

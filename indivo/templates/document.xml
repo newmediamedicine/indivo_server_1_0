@@ -35,7 +35,11 @@
   {% if doc.relates_to %}
     <relatesTo>
       {% for relationship in doc.relates_to %}
-      <relation type="{{relationship.relationship__type}}" count="{{relationship.count}}" />
+      <relation type="{{relationship.relationship__type}}" count="{{relationship.count}}">
+        {% for d in relationship.docs %}
+        <relatedDocument id="{{ d.document_1_id }}" />
+        {% endfor %}
+      </relation>
       {% endfor %}
     </relatesTo>
   {% endif %}
@@ -43,7 +47,11 @@
   {% if doc.is_related_from %}
     <isRelatedFrom>
       {% for relationship in doc.is_related_from %}
-      <relation type="{{relationship.relationship__type}}" count="{{relationship.count}}" />
+      <relation type="{{relationship.relationship__type}}" count="{{relationship.count}}">
+        {% for d in relationship.docs %}
+        <relatedDocument id="{{ d.document_0_id }}" />
+        {% endfor %}
+      </relation>
       {% endfor %}
     </isRelatedFrom>
   {% endif %}

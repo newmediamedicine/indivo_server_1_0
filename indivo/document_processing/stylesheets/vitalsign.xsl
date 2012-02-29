@@ -4,24 +4,51 @@
   <xsl:template match="indivodoc:VitalSign">
     <facts>
       <fact>
-        <date_measured><xsl:value-of select='indivodoc:dateMeasured/text()' /></date_measured>
-        <xsl:if test="indivodoc:name">
-	        <name><xsl:value-of select='indivodoc:name/text()' /></name>
-	        <name_type><xsl:value-of select='indivodoc:name/@type' /></name_type>
-	        <name_value><xsl:value-of select='indivodoc:name/@value' /></name_value>
-	        <name_abbrev><xsl:value-of select='indivodoc:name/@abbrev' /></name_abbrev>
+        <name><xsl:value-of select='indivodoc:name/text()' /></name>
+        <name_type><xsl:value-of select='indivodoc:name/@type' /></name_type>
+        <name_value><xsl:value-of select='indivodoc:name/@value' /></name_value>
+        <name_abbrev><xsl:value-of select='indivodoc:name/@abbrev' /></name_abbrev>
+        <measuredBy><xsl:value-of select='indivodoc:measuredBy/text()' /></measuredBy>
+        <dateMeasuredStart><xsl:value-of select='indivodoc:dateMeasuredStart/text()' /></dateMeasuredStart>
+        <xsl:if test="indivodoc:dateMeasuredEnd">        
+          <dateMeasuredEnd><xsl:value-of select='indivodoc:dateMeasuredEnd/text()' /></dateMeasuredEnd>
         </xsl:if>
-        <value><xsl:value-of select='indivodoc:value/text()' /></value>
-        <xsl:if test="indivodoc:unit">
-	        <unit><xsl:value-of select='indivodoc:unit/text()' /></unit>
-	        <unit_type><xsl:value-of select='indivodoc:unit/@type' /></unit_type>
-	        <unit_value><xsl:value-of select='indivodoc:unit/@value' /></unit_value>
-	        <unit_abbrev><xsl:value-of select='indivodoc:unit/@abbrev' /></unit_abbrev>
+        <xsl:if test="indivodoc:result">        
+          <xsl:apply-templates select='indivodoc:result' /> 
         </xsl:if>
-        <site><xsl:value-of select='indivodoc:site/text()' /></site>
-        <position><xsl:value-of select='indivodoc:position/text()' /></position>
-        <comments><xsl:value-of select='indivodoc:comments/text()' /></comments>
+        <xsl:if test="indivodoc:site">        
+          <site><xsl:value-of select='indivodoc:site/text()' /></site>
+        </xsl:if>
+        <xsl:if test="indivodoc:position">        
+          <position><xsl:value-of select='indivodoc:position/text()' /></position>
+        </xsl:if>
+        <xsl:if test="indivodoc:technique">        
+          <technique><xsl:value-of select='indivodoc:technique/text()' /></technique>
+        </xsl:if>
+        <xsl:if test="indivodoc:comments">        
+          <comments><xsl:value-of select='indivodoc:comments/text()' /></comments>
+        </xsl:if>
       </fact>
     </facts>
   </xsl:template>
+
+
+  <xsl:template match="indivodoc:result">
+    <xsl:if test="indivodoc:textValue">
+      <result_textvalue><xsl:value-of select='indivodoc:textValue/text()' /></result_textvalue>
+    </xsl:if>
+    <xsl:if test="indivodoc:value">
+      <result_value><xsl:value-of select='indivodoc:value/text()' /></result_value>
+    </xsl:if>
+    <xsl:if test="indivodoc:unit">
+      <result_unit>
+        <xsl:value-of select='indivodoc:unit/text()' />
+      </result_unit>
+      <result_unit_type><xsl:value-of select='indivodoc:unit/@type' /></result_unit_type>
+      <result_unit_value><xsl:value-of select='indivodoc:unit/@value' /></result_unit_value>
+      <result_unit_abbrev><xsl:value-of select='indivodoc:unit/@abbrev' /></result_unit_abbrev>
+    </xsl:if>
+  </xsl:template>
+
+
 </xsl:stylesheet>

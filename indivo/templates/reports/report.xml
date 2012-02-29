@@ -15,7 +15,8 @@
 {% block report %}
 {% for fobj in fobjs %}
 <Report>
-  <Meta>{% with fobj.document as doc %}{% include "document.xml" %}{% endwith %}</Meta>
+  {% comment %}<Meta>{% with fobj.document as doc %}{% include "document.xml" %}{% endwith %}</Meta>{% endcomment %}
+  <Meta>{{ fobj.document_id|get_doc_obj_rels }}</Meta>
   <Item>
     {% include item_template %}
   </Item>

@@ -8,6 +8,16 @@ urlpatterns = patterns('',
     # forgotten password: Combines a reset and a secret-resend into one call
     (r'^forgot-password$', MethodDispatcher({'POST': account_forgot_password})),
 
+    # FBY: send an account a message
+    (r'^send/$', MethodDispatcher({'POST' : send_account_message})),
+
+    # FBY: get messages account sent
+    (r'^sent/$', MethodDispatcher({'GET' : account_sent})),
+
+    # FBY: archive a sent message
+    (r'^sent/(?P<message_id>[^/]+)/archive$',
+      MethodDispatcher({'POST': account_sent_message_archive})),
+
     # reset
     (r'^reset$', MethodDispatcher({'POST': account_reset})),
 

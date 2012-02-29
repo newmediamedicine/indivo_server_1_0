@@ -51,7 +51,15 @@ def _get_doc_relations(doc):
     """
 
     relates_to = doc.rels_as_doc_0.values('relationship__type').annotate(count=Count('relationship'))
+    for relation in relates_to:
+        docs = doc.rels_as_doc_0.filter(relationship__type=relation['relationship__type']).values('document_1_id')
+        relation['docs'] = docs
+
     is_related_from = doc.rels_as_doc_1.values('relationship__type').annotate(count=Count('relationship'))
+    for relation in is_related_from:
+        docs = doc.rels_as_doc_1.filter(relationship__type=relation['relationship__type']).values('document_0_id')
+        relation['docs'] = docs
+
     return relates_to, is_related_from
     
 

@@ -1,0 +1,26 @@
+{% load template_utils %}<EquipmentScheduleItem xmlns="http://indivo.org/vocab/xml/documents#">
+  <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+  <scheduledBy>{{ fobj.scheduled_by }}</scheduledBy>
+  <dateScheduled>{{ fobj.date_scheduled|format_iso8601_datetime }}</dateScheduled>
+  <dateStart>{{ fobj.date_start|format_iso8601_datetime }}</dateStart>
+  {% if fobj.date_end %}
+  <dateEnd>{{ fobj.date_end|format_iso8601_datetime }}</dateEnd>
+  {% endif %}
+  {% if fobj.recurrencerule_frequency %}
+  <recurrenceRule>
+    <frequency{% if fobj.recurrencerule_frequency_type %} type="{{ fobj.recurrencerule_frequency_type }}" value="{{ fobj.recurrencerule_frequency_value }}"{% if fobj.recurrencerule_frequency_abbrev %} abbrev="{{ fobj.recurrencerule_frequency_abbrev }}"{% endif %}{% endif %}>{{ fobj.recurrencerule_frequency }}</frequency>
+    {% if fobj.recurrencerule_interval %}
+    <interval{% if fobj.recurrencerule_interval_type %} type="{{ fobj.recurrencerule_interval_type }}" value="{{ fobj.recurrencerule_interval_value }}"{% if fobj.recurrencerule_frequency_abbrev %} abbrev="{{ fobj.recurrencerule_interval_abbrev }}"{% endif %}{% endif %}>{{ fobj.recurrencerule_interval }}</interval>
+    {% endif %}
+    {% if fobj.recurrencerule_dateuntil %}
+    <dateUntil>{{ fobj.recurrencerule_dateuntil|format_iso8601_datetime }}</dateUntil>
+    {% endif %}
+    {% if fobj.recurrencerule_count %}
+    <count>{{ fobj.recurrencerule_count }}</count>
+    {% endif %}
+  </recurrenceRule>
+  {% endif %}
+  {% if fobj.instructions %}
+  <instructions>{{ fobj.instructions }}</instructions>
+  {% endif %}
+</EquipmentScheduleItem>

@@ -62,6 +62,48 @@ def account_send_message(request, account):
   account.notify_account_of_new_message()
   return DONE
 
+@transaction.commit_manually
+@handle_integrity_error('Duplicate external id. Each message requires a unique message_id')
+def send_account_message(request, account):
+  """
+  Account messages have no attachments for now, as we wouldn't know
+  which record to store them on.
+
+  request.POST may contain any of:
+
+  * *message_id*: An external identifier for the message, used for later
+    retrieval. Defaults to ``None``.
+
+  * *subject*: The message subject. Defaults to ``[no subject]``.
+
+  * *body*: The message body. Defaults to ``[no body]``.
+
+  * *severity*: The importance of the message. Options are ``low``, ``medium``,
+    ``high``. Defaults to ``low``.
+
+  After delivering the message to Indivo's inbox, this call will send an email to 
+  the account's contact address, alerting them that a new message has arrived.
+
+  Will return :http:statuscode:`200` on success, :http:statuscode:`400` if the
+  passed *message_id* is a duplicate.
+  """
+  try:
+    Message.objects.create( 
+      account             = account, 
+      sender              = request.principal,
+      recipient           = account, 
+      external_identifier = request.POST.get('message_id', None), 
+      subject             = _get_subject(request),
+      body                = request.POST.get('body', "[no body]"),
+      severity            = request.POST.get('severity', 'low'))
+    account.notify_account_of_new_message()
+  except IntegrityError: # Occurs if the same sender uses the same message_id for different messages.
+    transaction.rollback()
+    return HttpResponseBadRequest('Duplicate external id: %s. Each message requires a unique message_id'%message_id)
+  else:
+    transaction.commit()
+    return DONE
+
 @transaction.commit_on_success
 @handle_integrity_error('Duplicate external id. Each message requires a unique message_id')
 def record_send_message(request, record, message_id):
@@ -227,7 +269,6 @@ def account_message_archive(request, account, message_id):
     message.save()
   return DONE
 
-
 @marsloader()
 def account_notifications(request, account, limit, offset, status, order_by):
   """ List an account's notifications.
@@ -240,3 +281,43 @@ def account_notifications(request, account, limit, offset, status, order_by):
 
   notifications = Notification.objects.filter(account = account).order_by(order_by)
   return render_template('notifications', {'notifications' : notifications})
+
+
+@marsloader()
+def account_sent(request, account, limit, offset, status, order_by):
+  """ List messages sent by account.
+
+  Messages will be ordered by *order_by* and paged by *limit* and
+  *offset*. request.GET may additionally contain:
+
+  * *include_archive*: Adds messages that have been archived (which are
+    normally omitted) to the listing. Any value will be interpreted as ``True``. 
+    Defaults to ``False``, as if it weren't passed.
+
+  Will return :http:statuscode:`200` with a list of messages on success.
+
+  """
+  messages = account.message_as_sender.order_by(order_by)
+
+  if not request.GET.get('include_archive', False):
+    messages = messages.filter(sent_archived_at=None)
+
+  return render_template('messages', {'messages' : messages})
+
+def account_sent_message_archive(request, account, message_id):
+  """ Archive a sent message.
+
+  This call sets a message's sent archival date as now, unless it's already set. 
+  This means that future calls to 
+  :py:meth:`~indivo.views.messaging.account_sent` will not
+  display this message by default.
+  
+  Will return :http:statuscode:`200` on success.
+
+  """
+
+  message = account.message_as_sender.get(id = message_id)
+  if not message.sent_archived_at:
+    message.sent_archived_at = datetime.datetime.utcnow()
+    message.save()
+  return DONE

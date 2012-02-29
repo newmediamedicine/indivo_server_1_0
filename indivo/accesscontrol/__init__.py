@@ -73,10 +73,23 @@ def load_access_rules():
            account_inbox_message_attachment_accept,
            account_message_archive,
            account_notifications,
+           account_sent,
+           account_sent_message_archive,
            account_permissions]
   AccessRule('Account Management No Admin App', 
              account_management_no_admin_app, views)           
 
+  #
+  # FBY: This allows an account to sent a message to anothor account.
+  #      It may not be possible for an account to send a message to itself
+  #      but that should not be an issue.
+  #
+  def send_account_message_no_admin_app(principal, account, **unused_args):
+    return not (principal.isSame(account))
+  views = [send_account_message]
+  AccessRule('Send Account Message No Admin App', 
+             send_account_message_no_admin_app, views)
+  
   def account_management_admin_app_only(principal, **unused_args):
     """Any admin app."""
     return principal.isType('MachineApp')
@@ -274,6 +287,13 @@ def load_access_rules():
            immunization_list,
            allergy_list,
            medication_list,
+           medicationorder_list,
+           medicationfill_list,
+           medicationadministration_list,
+           medicationscheduleitem_list,
+           equipmentscheduleitem_list,
+           adherenceitem_list,
+           videomessage_list,
            procedure_list,
            problem_list,
            equipment_list,

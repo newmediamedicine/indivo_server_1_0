@@ -16,16 +16,23 @@ from django.conf import settings
 from django.db import transaction
 from django.core.files.base import ContentFile
 
-from idp_objs.allergy               import IDP_Allergy
-from idp_objs.equipment             import IDP_Equipment
-from idp_objs.measurement           import IDP_Measurement
-from idp_objs.immunization          import IDP_Immunization
-from idp_objs.lab                   import IDP_Lab
-from idp_objs.medication            import IDP_Medication
-from idp_objs.problem               import IDP_Problem
-from idp_objs.procedure             import IDP_Procedure
-from idp_objs.simple_clinical_note  import IDP_SimpleClinicalNote
-from idp_objs.vitals                import IDP_Vitals
+from idp_objs.allergy                   import IDP_Allergy
+from idp_objs.equipment                 import IDP_Equipment
+from idp_objs.measurement               import IDP_Measurement
+from idp_objs.immunization              import IDP_Immunization
+from idp_objs.lab                       import IDP_Lab
+from idp_objs.medication                import IDP_Medication
+from idp_objs.medicationscheduleitem    import IDP_MedicationScheduleItem
+from idp_objs.equipmentscheduleitem     import IDP_EquipmentScheduleItem
+from idp_objs.medicationadministration  import IDP_MedicationAdministration
+from idp_objs.medicationfill            import IDP_MedicationFill
+from idp_objs.medicationorder           import IDP_MedicationOrder
+from idp_objs.adherenceitem             import IDP_AdherenceItem
+from idp_objs.videomessage              import IDP_VideoMessage
+from idp_objs.problem                   import IDP_Problem
+from idp_objs.procedure                 import IDP_Procedure
+from idp_objs.simple_clinical_note      import IDP_SimpleClinicalNote
+from idp_objs.vitals                    import IDP_Vitals
 
 DP_DOBJ_PROCESS   = 'process'
 DP_DOBJ_POST_DATA = 'post_data'
@@ -37,6 +44,13 @@ DOC_CLASS_REL     = {
                   'http://indivo.org/vocab/xml/documents#Immunization'  :   {'class' : 'IDP_Immunization',  'stylesheet' : 'immunization', 'schema' : 'immunization'},
                   'http://indivo.org/vocab/xml/documents#Lab'           :   {'class' : 'IDP_Lab',           'stylesheet' : 'lab', 'schema' : 'lab'},
                   'http://indivo.org/vocab/xml/documents#Medication'    :   {'class' : 'IDP_Medication',    'stylesheet' : 'medication', 'schema' : 'medication'},
+                  'http://indivo.org/vocab/xml/documents#MedicationScheduleItem'    :   {'class' : 'IDP_MedicationScheduleItem',    'stylesheet' : 'medicationscheduleitem', 'schema' : 'medicationscheduleitem'},
+                  'http://indivo.org/vocab/xml/documents#EquipmentScheduleItem'     :   {'class' : 'IDP_EquipmentScheduleItem',    'stylesheet' : 'equipmentscheduleitem', 'schema' : 'equipmentscheduleitem'},
+                  'http://indivo.org/vocab/xml/documents#MedicationAdministration'  :   {'class' : 'IDP_MedicationAdministration',    'stylesheet' : 'medicationadministration', 'schema' : 'medicationadministration'},
+                  'http://indivo.org/vocab/xml/documents#MedicationFill'            :   {'class' : 'IDP_MedicationFill',    'stylesheet' : 'medicationfill', 'schema' : 'medicationfill'},
+                  'http://indivo.org/vocab/xml/documents#MedicationOrder'           :   {'class' : 'IDP_MedicationOrder',    'stylesheet' : 'medicationorder', 'schema' : 'medicationorder'},
+                  'http://indivo.org/vocab/xml/documents#AdherenceItem'             :   {'class' : 'IDP_AdherenceItem',    'stylesheet' : 'adherenceitem', 'schema' : 'adherenceitem'},
+                  'http://indivo.org/vocab/xml/documents#VideoMessage'              :   {'class' : 'IDP_VideoMessage',    'stylesheet' : 'videomessage', 'schema' : 'videomessage'},
                   'http://indivo.org/vocab/xml/documents#Problem'       :   {'class' : 'IDP_Problem',       'stylesheet' : 'problem', 'schema' : 'problem'},
                   'http://indivo.org/vocab/xml/documents#Procedure'     :   {'class' : 'IDP_Procedure',     'stylesheet' : 'procedure', 'schema' : 'procedure'},
                   'http://indivo.org/vocab/xml/documents#VitalSign'     :   {'class' : 'IDP_Vitals',        'stylesheet' : 'vitalsign', 'schema' : 'vitals'}

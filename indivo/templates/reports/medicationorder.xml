@@ -1,0 +1,34 @@
+{% load template_utils %}<MedicationOrder xmlns="http://indivo.org/vocab/xml/documents#">
+  <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+  <orderType>{{ fobj.order_type }}</orderType>
+  <orderedBy>{{ fobj.ordered_by }}</orderedBy>
+  <dateOrdered>{{ fobj.date_ordered|format_iso8601_datetime }}</dateOrdered>
+  {% if fobj.date_expires %}
+  <dateExpires>{{ fobj.date_expires|format_iso8601_datetime }}</dateExpires>
+  {% endif %}
+  {% if fobj.indication %}
+  <indication>{{ fobj.indication }}</indication>
+  {% endif %}
+  {% if fobj.amountordered_value or fobj.amountordered_textvalue %}
+  <amountOrdered>
+    {% if fobj.amountordered_value %}
+    <value>{{ fobj.amountordered_value }}</value>
+    {% endif %}
+    {% if fobj.amountordered_textvalue %}
+    <textValue>{{ fobj.amountordered_textvalue }}</textValue>
+    {% endif %}
+    {% if fobj.amountordered_unit %}
+    <unit{% if fobj.amountordered_unit_type %} type="{{ fobj.amountordered_unit_type }}" value="{{ fobj.amountordered_unit_value }}"{% if fobj.amountordered_unit_abbrev %} abbrev="{{ fobj.amountordered_unit_abbrev }}"{% endif %}{% endif %}>{{ fobj.amountordered_unit }}</unit>
+    {% endif %}
+  </amountOrdered>
+  {% endif %}
+  {% if fobj.refills %}
+  <refills>{{ fobj.refills }}</refills>
+  {% endif %}
+  {% if fobj.substitution_permitted %}
+  <substitutionPermitted>{{ fobj.substitution_permitted }}</substitutionPermitted>
+  {% endif %}
+  {% if fobj.instructions %}
+  <instructions>{{ fobj.instructions }}</instructions>
+  {% endif %}
+</MedicationOrder>

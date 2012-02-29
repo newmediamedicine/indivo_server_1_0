@@ -12,6 +12,123 @@ REL = 'annotation'
 STATUS = {'status':'void', 'reason':'because I CAN'}
 LAB_CODE = 'HBA1C' # MAKE SURE TO ADD THESE MEASUREMENTS
 
+SHOW_CUSTOM_DOC_REPORTS = False # set to True to display reports for all custom document types
+
+ADHERENCEITEM_DOC1 = """<AdherenceItem xmlns="http://indivo.org/vocab/xml/documents#">
+	<name>Atorvastatin 40 MG Oral Tablet [Lipitor]</name>
+	<reportedBy>rpoole@records.media.mit.edu</reportedBy>
+	<dateReported>2009-05-17T08:52:21-04:00</dateReported>
+	<recurrenceIndex>0</recurrenceIndex>
+	<adherence>true</adherence>
+</AdherenceItem>"""
+
+ADHERENCEITEM_DOC2 = """<AdherenceItem xmlns="http://indivo.org/vocab/xml/documents#">
+	<name>Fish Oil Capsules</name>
+	<reportedBy>rpoole@records.media.mit.edu</reportedBy>
+	<dateReported>2009-05-17T08:52:21-04:00</dateReported>
+	<recurrenceIndex>0</recurrenceIndex>
+	<adherence>true</adherence>
+</AdherenceItem>"""
+
+EQUIPMENTSCHEDULEITEM_DOC = """<EquipmentScheduleItem xmlns="http://indivo.org/vocab/xml/documents#">
+	<name> FORA D15b </name>
+<scheduledBy>jking@records.media.mit.edu</scheduledBy>
+	<dateScheduled>2011-02-14T13:00:00-04:00</dateScheduled>
+	<dateStart>2011-02-15T10:00:00-04:00</dateStart>
+<dateEnd>2011-02-15T14:00:00-04:00</dateEnd>
+	<recurrenceRule>
+		<frequency>DAILY</frequency>
+		<count>30</count>
+	</recurrenceRule>
+	<instructions>press the big blue button</instructions>
+</EquipmentScheduleItem>"""
+
+MEDICATIONADMINISTRATION_DOC = """<MedicationAdministration xmlns="http://indivo.org/vocab/xml/documents#">
+	<name type="http://rxnav.nlm.nih.gov/REST/rxcui/" value="617320">Atorvastatin 40 MG Oral Tablet [Lipitor]</name>
+	<reportedBy>rpoole@records.media.mit.edu</reportedBy>
+	<dateReported>2009-05-17T08:52:21-04:00</dateReported>
+	<dateAdministered>2009-05-17T08:52:21-04:00</dateAdministered>
+    <amountAdministered>
+        <value>1</value>
+        <textValue>placebo</textValue>
+	    <unit>tablet</unit>
+    </amountAdministered>
+    <amountRemaining>
+        <value>29</value>
+	    <unit>tablet</unit>
+    </amountRemaining>
+</MedicationAdministration>"""
+
+MEDICATIONFILL_DOC = """<MedicationFill xmlns="http://indivo.org/vocab/xml/documents#">
+	<name type="http://rxnav.nlm.nih.gov/REST/rxcui/" value="617320">Atorvastatin 40 MG Oral Tablet [Lipitor]</name>
+	<filledBy>pharmacist@records.media.mit.edu</filledBy>
+	<dateFilled>2009-05-16T14:02:51-04:00</dateFilled>
+	<amountFilled>
+		<value>30</value>
+        <textValue>placebo</textValue>
+		<unit>tablet</unit>
+</amountFilled>
+	<ndc>65427004730</ndc>
+    <fillSequenceNumber>000234587</fillSequenceNumber>
+    <lotNumber>0855020</lotNumber>
+    <instructions>take with water</instructions>
+</MedicationFill>"""
+
+MEDICATIONORDER_DOC = """<MedicationOrder xmlns="http://indivo.org/vocab/xml/documents#">
+	<name type="http://rxnav.nlm.nih.gov/REST/rxcui/" value="310798">Hydrochlorothiazide 25 MG Oral Tablet</name>
+	<orderType>prescribed</orderType>
+	<orderedBy>jking@records.media.mit.edu </orderedBy>
+	<dateOrdered>2011-02-14T09:00:00-04:00</dateOrdered>
+	<dateExpires>2011-05-14T09:00:00-04:00</dateExpires>
+	<indication>hypertension</indication>
+	<amountOrdered>
+		<value>30</value>
+        <textValue>placebo</textValue>
+		<unit  type="http://indivo.org/codes/units#" value="tab" abbrev="tab">tablet</unit>
+	</amountOrdered>
+	<substitutionPermitted>true</substitutionPermitted>
+	<instructions>take with water</instructions>
+</MedicationOrder>"""
+
+MEDICATIONSCHEDULEITEM_DOC = """<MedicationScheduleItem xmlns="http://indivo.org/vocab/xml/documents#">
+	<name type="http://rxnav.nlm.nih.gov/REST/rxcui/" value="617320">Atorvastatin 40 MG Oral Tablet [Lipitor]</name>
+<scheduledBy>jking@records.media.mit.edu</scheduledBy>
+	<dateScheduled>2011-02-14T13:00:00-04:00</dateScheduled>
+	<dateStart>2011-02-15T10:00:00-04:00</dateStart>
+<dateEnd>2011-02-15T14:00:00-04:00</dateEnd>
+	<recurrenceRule>
+		<frequency>DAILY</frequency>
+		<count>30</count>
+	</recurrenceRule>
+	<dose>
+		<value>1</value>
+        <textValue>placebo</textValue>
+		<unit  type="http://indivo.org/codes/units#" value="tab" abbrev="tab">tablet</unit>
+	</dose>
+	<instructions>take in the evening for maximum benefit</instructions>
+</MedicationScheduleItem>"""
+
+VIDEOMESSAGE_DOC = """<VideoMessage xmlns="http://indivo.org/vocab/xml/documents#">
+	<fileId>rpoole1</fileId>
+	<storageType>FlashMediaServer</storageType>
+<subject>Nice Job Robert</subject>
+	<from>jking@records.media.mit.edu</from>
+	<dateRecorded>2009-05-17T08:52:21-04:00</dateRecorded>
+	<dateSent>2009-05-17T08:52:21-04:00</dateSent>
+</VideoMessage>"""
+
+VITALS_DOC = """<VitalSign xmlns="http://indivo.org/vocab/xml/documents#">
+	<name type="http://codes.indivo.org/vitalsigns/" value="123" abbrev="BPsys">Blood Pressure Systolic</name>
+	<measuredBy>rpoole@records.media.mit.edu</measuredBy>
+  	<dateMeasuredStart>2009-05-16T15:23:21-04:00</dateMeasuredStart>
+  	<result>
+  		<value>145</value>
+        <textValue>placebo</textValue>
+  		<unit type="http://codes.indivo.org/units/" value="31" abbrev="mmHg">millimeters of mercury</unit>
+	</result>
+  	<site>left arm</site>
+  	<position>sitting</position>
+</VitalSign>"""
 
 def recordStateSetUp(test_cases_instance):
     _self = test_cases_instance
@@ -793,3 +910,184 @@ class RecordInternalTests(InternalTests):
     def test_get_record_vitals_by_category(self):
         # NOT IMPLEMENTED YET
         pass
+
+    ####################################################
+    # now come the tests for the custom document types #
+    ####################################################
+
+    def test_adherenceitem(self):
+        # create a document
+        record_id = self.record.id
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=ADHERENCEITEM_DOC1, content_type='text/xml')
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        # get a report containing the document above
+        url = '/records/%s/reports/minimal/adherenceitems/'%(record_id)
+        response = self.client.get(url)
+        if SHOW_CUSTOM_DOC_REPORTS:
+            print response.content
+        self.assertEquals(response.status_code, 200)
+
+    def test_equipmentscheduleitem(self):
+        """ This unit test also tests document relationships """
+        #
+        # create the EquipmentScheduleItem document
+        #
+        record_id = self.record.id
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=EQUIPMENTSCHEDULEITEM_DOC, content_type='text/xml')
+        #print response.content
+        esi_doc_id = response.content[14:50]
+        #print esi_doc_id
+        self.assertEquals(response.status_code, 200)
+
+        #
+        # now create 2 AdherenceItem documents
+        #
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=ADHERENCEITEM_DOC1, content_type='text/xml')
+        #print response.content
+        ai_doc_id_1 = response.content[14:50]
+        #print ai_doc_id_1
+        self.assertEquals(response.status_code, 200)
+
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=ADHERENCEITEM_DOC2, content_type='text/xml')
+        #print response.content
+        ai_doc_id_2 = response.content[14:50]
+        #print ai_doc_id_2
+        self.assertEquals(response.status_code, 200)
+
+        #
+        # now relate the AdherenceItem documents created above with the EquipmentScheduleItem document
+        #
+        rel = "annotation"
+
+        url = '/records/%s/documents/%s/rels/%s/%s'%(record_id, esi_doc_id, rel, ai_doc_id_1)
+        response = self.client.put(url)
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        url = '/records/%s/documents/%s/rels/%s/%s'%(record_id, esi_doc_id, rel, ai_doc_id_2)
+        response = self.client.put(url)
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        #
+        # create a Vitals document to relate EquipmentScheduleItem to
+        #
+        record_id = self.record.id
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=VITALS_DOC, content_type='text/xml')
+        #print response.content
+        v_doc_id = response.content[14:50]
+        #print v_doc_id
+        self.assertEquals(response.status_code, 200)
+
+        rel = "followup"
+
+        url = '/records/%s/documents/%s/rels/%s/%s'%(record_id, v_doc_id, rel, esi_doc_id)
+        response = self.client.put(url)
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        #
+        # finally get a report containing the EquipmentScheduleItem document and relating documents
+        #
+        url = '/records/%s/reports/minimal/equipmentscheduleitems/'%(record_id)
+        response = self.client.get(url)
+        if SHOW_CUSTOM_DOC_REPORTS:
+            print response.content
+        self.assertEquals(response.status_code, 200)
+
+    def test_medicationadministration(self):
+        # create a document
+        record_id = self.record.id
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=MEDICATIONADMINISTRATION_DOC, content_type='text/xml')
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        # get a report containing the document above
+        url = '/records/%s/reports/minimal/medicationadministrations/'%(record_id)
+        response = self.client.get(url)
+        if SHOW_CUSTOM_DOC_REPORTS:
+            print response.content
+        self.assertEquals(response.status_code, 200)
+
+    def test_medicationfill(self):
+        # create a document
+        record_id = self.record.id
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=MEDICATIONFILL_DOC, content_type='text/xml')
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        # get a report containing the document above
+        url = '/records/%s/reports/minimal/medicationfills/'%(record_id)
+        response = self.client.get(url)
+        if SHOW_CUSTOM_DOC_REPORTS:
+            print response.content
+        self.assertEquals(response.status_code, 200)
+
+    def test_medicationorder(self):
+        # create a document
+        record_id = self.record.id
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=MEDICATIONORDER_DOC, content_type='text/xml')
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        # get a report containing the document above
+        url = '/records/%s/reports/minimal/medicationorders/'%(record_id)
+        response = self.client.get(url)
+        if SHOW_CUSTOM_DOC_REPORTS:
+            print response.content
+        self.assertEquals(response.status_code, 200)
+
+    def test_medicationscheduleitem(self):
+        # create a document
+        record_id = self.record.id
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=MEDICATIONSCHEDULEITEM_DOC, content_type='text/xml')
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        # get a report containing the document above
+        url = '/records/%s/reports/minimal/medicationscheduleitems/'%(record_id)
+        response = self.client.get(url)
+        if SHOW_CUSTOM_DOC_REPORTS:
+            print response.content
+        self.assertEquals(response.status_code, 200)
+
+    def test_videomessage(self):
+        # create a document
+        record_id = self.record.id
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=VIDEOMESSAGE_DOC, content_type='text/xml')
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        # get a report containing the document above
+        url = '/records/%s/reports/minimal/videomessages/'%(record_id)
+        response = self.client.get(url)
+        if SHOW_CUSTOM_DOC_REPORTS:
+            print response.content
+        self.assertEquals(response.status_code, 200)
+
+    def test_vitals(self):
+        # create a document
+        record_id = self.record.id
+        url = '/records/%s/documents/'%(record_id)
+        response = self.client.post(url, data=VITALS_DOC, content_type='text/xml')
+        #print response.content
+        self.assertEquals(response.status_code, 200)
+
+        # get a report containing the document above
+        url = '/records/%s/reports/minimal/vitals/'%(record_id)
+        response = self.client.get(url)
+        if SHOW_CUSTOM_DOC_REPORTS:
+            print response.content
+        self.assertEquals(response.status_code, 200)

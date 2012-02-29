@@ -14,8 +14,7 @@ from indivo.models import Vitals
 
 VITALS_FILTERS = {
   'category' : ('name', STRING),
-  'value' : ('value', NUMBER),
-  'date_measured': ('date_measured', DATE),
+  'date_measured_start': ('date_measured_start', DATE),
   DEFAULT_ORDERBY : ('created_at', DATE)
 }
 

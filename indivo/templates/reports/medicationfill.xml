@@ -1,0 +1,31 @@
+{% load template_utils %}<MedicationFill xmlns="http://indivo.org/vocab/xml/documents#">
+  <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+  <filledBy>{{ fobj.filled_by }}</filledBy>
+  <dateFilled>{{ fobj.date_filled|format_iso8601_datetime }}</dateFilled>
+  <amountFilled>
+    {% if fobj.amountfilled_value %}
+    <value>{{ fobj.amountfilled_value }}</value>
+    {% endif %}
+    {% if fobj.amountfilled_textvalue %}
+    <textValue>{{ fobj.amountfilled_textvalue }}</textValue>
+    {% endif %}
+    {% if fobj.amountfilled_unit %}
+    <unit{% if fobj.amountfilled_unit_type %} type="{{ fobj.amountfilled_unit_type }}" value="{{ fobj.amountfilled_unit_value }}"{% if fobj.amountfilled_unit_abbrev %} abbrev="{{ fobj.amountfilled_unit_abbrev }}"{% endif %}{% endif %}>{{ fobj.amountfilled_unit }}</unit>
+    {% endif %}
+  </amountFilled>
+  {% if fobj.ndc %}
+  <ndc{% if fobj.ndc_type %} type="{{ fobj.ndc_type }}" value="{{ fobj.ndc_value }}"{% if fobj.ndc_abbrev %} abbrev="{{ fobj.ndc_abbrev }}"{% endif %}{% endif %}>{{ fobj.ndc }}</ndc>
+  {% endif %}
+  {% if fobj.fill_sequence_number %}
+  <fillSequenceNumber>{{ fobj.fill_sequence_number }}</fillSequenceNumber>
+  {% endif %}
+  {% if fobj.lot_number %}
+  <lotNumber>{{ fobj.lot_number }}</lotNumber>
+  {% endif %}
+  {% if fobj.refills_remaining %}
+  <refillsRemaining>{{ fobj.refills_remaining }}</refillsRemaining>
+  {% endif %}
+  {% if fobj.instructions %}
+  <instructions>{{ fobj.instructions }}</instructions>
+  {% endif %}
+</MedicationFill>
