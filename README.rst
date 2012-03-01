@@ -5,7 +5,7 @@ For the Python import paths to work, you must do the following:
 
 When cloning this repo, clone into indivo_server.
 
-* git clone git@github.com:fyoung/indivo_server_1_0.git indivo_server
+* git clone https://github.com/fyoung/indivo_server_1_0.git indivo_server
 
 
 Welcome to Indivo
