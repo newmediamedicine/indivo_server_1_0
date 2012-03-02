@@ -5,7 +5,6 @@
 *~
 *#
 utils/indivo_data.xml
-files/
 indivo_documents/
 indivo_ui/static/indivo_client/resources/images*
 settings.py

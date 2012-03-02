@@ -39,7 +39,7 @@ get_doc_obj.is_safe = True
 @register.filter
 @stringfilter
 def get_doc_obj_rels(doc_id):
-  print doc_id
+  #print doc_id
   try:
     document = Document.objects.get(id=doc_id)
     document.relates_to, document.is_related_from = _get_doc_relations(document)
