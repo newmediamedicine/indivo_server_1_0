@@ -204,6 +204,7 @@ class Migration(SchemaMigration):
             ('body', self.gf('django.db.models.fields.TextField')()),
             ('received_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('read_at', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('sent_read_at', self.gf('django.db.models.fields.DateTimeField')(null=True)),
             ('archived_at', self.gf('django.db.models.fields.DateTimeField')(null=True)),
             ('sent_archived_at', self.gf('django.db.models.fields.DateTimeField')(null=True)),
             ('response_to', self.gf('django.db.models.fields.related.ForeignKey')(related_name='message_responses', null=True, to=orm['indivo.Message'])),
@@ -1285,6 +1286,7 @@ class Migration(SchemaMigration):
             'response_to': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'message_responses'", 'null': 'True', 'to': "orm['indivo.Message']"}),
             'sender': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'message_as_sender'", 'to': "orm['indivo.Principal']"}),
             'sent_archived_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'sent_read_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'severity': ('django.db.models.fields.CharField', [], {'default': "'low'", 'max_length': '100'}),
             'subject': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },

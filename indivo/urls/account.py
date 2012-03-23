@@ -14,6 +14,10 @@ urlpatterns = patterns('',
     # FBY: get messages account sent
     (r'^sent/$', MethodDispatcher({'GET' : account_sent})),
 
+    # FBY: read a sent message
+    (r'^sent/(?P<message_id>[^/]+)$',
+      MethodDispatcher({'GET': account_sent_message})),
+
     # FBY: archive a sent message
     (r'^sent/(?P<message_id>[^/]+)/archive$',
       MethodDispatcher({'POST': account_sent_message_archive})),

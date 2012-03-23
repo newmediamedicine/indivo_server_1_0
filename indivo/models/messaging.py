@@ -39,6 +39,7 @@ class Message(Object):
     
     received_at = models.DateTimeField(auto_now_add = True)
     read_at = models.DateTimeField(auto_now_add=False, null=True)
+    sent_read_at = models.DateTimeField(auto_now_add=False, null=True)
     archived_at = models.DateTimeField(auto_now_add=False, null=True)
     sent_archived_at = models.DateTimeField(auto_now_add=False, null=True)
 

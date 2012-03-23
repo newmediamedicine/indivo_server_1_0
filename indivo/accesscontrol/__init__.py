@@ -74,6 +74,7 @@ def load_access_rules():
            account_message_archive,
            account_notifications,
            account_sent,
+           account_sent_message,
            account_sent_message_archive,
            account_permissions]
   AccessRule('Account Management No Admin App', 

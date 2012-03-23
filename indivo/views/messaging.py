@@ -302,7 +302,7 @@ def account_sent(request, account, limit, offset, status, order_by):
   if not request.GET.get('include_archive', False):
     messages = messages.filter(sent_archived_at=None)
 
-  return render_template('messages', {'messages' : messages})
+  return render_template('messages', {'messages' : messages, 'sent_view' : True})
 
 def account_sent_message_archive(request, account, message_id):
   """ Archive a sent message.
@@ -321,3 +321,39 @@ def account_sent_message_archive(request, account, message_id):
     message.sent_archived_at = datetime.datetime.utcnow()
     message.save()
   return DONE
+
+def account_sent_message(request, account, message_id):
+  """ Retrieve an individual message which an account sent.
+
+  This call additionally filters message content based on its
+  body-type. For example, markdown content is scrubbed of 
+  extraneous HTML, then converted to HTML content. Also, this
+  call marks the message as read.
+
+  *message_id* should be the external identifier of the message
+  as created by 
+  :py:meth:`~indivo.views.messaging.account_send_message` or
+  :py:meth:`~indivo.views.messaging.record_send_message`.
+
+  Will return :http:statuscode:`200` with XML describing the message
+  (id, sender, dates received, read, and archived, subject, body,
+  severity, etc.) on success.
+
+  """
+
+  message = account.message_as_sender.get(id = message_id)
+
+  # if message not read, mark it read
+  if not message.sent_read_at:
+    message.sent_read_at = datetime.datetime.utcnow()
+    message.save()
+
+  # markdown
+  if message.body_type == 'markdown':
+    ext = mdx_linkexpander.MessageLinkExpanderExtension({
+        'APP_BASE':'foobar',
+        'message_id': message_id
+        })
+    message.body = markdown.Markdown(safe_mode=True, output_format='html4', extensions = [ext]).convert(message.body)
+
+  return render_template('message', {'message' : message, 'sent_view' : True})
