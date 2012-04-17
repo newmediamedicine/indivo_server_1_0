@@ -1,0 +1,18 @@
+{% load template_utils %}
+<HealthActionPlan xmlns="http://indivo.org/vocab/xml/documents#">
+  <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+  <planType>{{ fobj.planType }}</planType>
+  <plannedBy>{{ fobj.plannedBy }}</plannedBy>
+  <datePlanned>{{ fobj.datePlanned|format_iso8601_datetime }}</datePlanned>
+  {% if fobj.dateExpires %}
+  <dateExpires>{{ fobj.dateExpires|format_iso8601_datetime }}</dateExpires>
+  {% endif %}
+  <indication>{{ fobj.indication }}</indication>
+  {% if fobj.instructions %}
+  <instructions>{{ fobj.instructions }}</instructions>
+  {% endif %}
+  {% if fobj.system %}
+  <system{% if fobj.system_type %} type="{{ fobj.system_type }}" value="{{ fobj.system_value }}"{% if fobj.system_abbrev %} abbrev="{{ fobj.system_abbrev }}"{% endif %}{% endif %}>{{ fobj.system }}</system>
+  {% endif %}
+  {% autoescape off %}{{ fobj.actions }}{% endautoescape %}
+</HealthActionPlan>

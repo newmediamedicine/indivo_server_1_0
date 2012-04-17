@@ -795,6 +795,351 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('indivo', ['VideoMessage'])
 
+        ###########################################
+        # Adding models used for 'HealthActionPlan'
+        ###########################################
+
+        # Adding model 'StopConditions'
+        db.create_table('indivo_stopconditions', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('value_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('value_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('value_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('operator', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('operator_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('operator_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('operator_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('detail', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('detail_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('detail_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('detail_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+        ))
+        db.send_create_signal('indivo', ['StopConditions'])
+        
+        # Adding model 'Targets'
+        db.create_table('indivo_targets', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('minimumValue_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('minimumValue_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('minimumValue_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('minimumValue_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('minimumValue_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('minimumValue_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('maximumValue_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('maximumValue_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('maximumValue_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('maximumValue_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('maximumValue_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('maximumValue_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('securityLevel', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('securityLevel_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('securityLevel_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('securityLevel_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+        ))
+        db.send_create_signal('indivo', ['Targets'])
+
+        # Adding model 'MeasurementPlans'
+        db.create_table('indivo_measurementplans', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('aggregationFunction', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('aggregationFunction_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('aggregationFunction_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('aggregationFunction_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+        ))
+        db.send_create_signal('indivo', ['MeasurementPlans'])
+
+        # Adding model 'DevicePlans'
+        db.create_table('indivo_deviceplans', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('value_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('value_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('value_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('site', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('site_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('site_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('site_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('instructions', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True)),
+        ))
+        db.send_create_signal('indivo', ['DevicePlans'])
+
+        # Adding model 'MedicationPlans'
+        db.create_table('indivo_medicationplans', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('indication', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('dose_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('dose_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('dose_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('dose_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('dose_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('dose_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('route', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('route_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('route_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('route_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+        ))
+        db.send_create_signal('indivo', ['MedicationPlans'])
+
+        # Adding model 'Action'
+        db.create_table('indivo_actions', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            ('action_type', self.gf('django.db.models.fields.CharField')(max_length=11)),
+            ('state', self.gf('django.db.models.fields.CharField')(max_length=5)),
+            ('healthactionplan_id', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('position', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('position_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('position_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('position_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('repeatCount', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('additionalDetails', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True)),
+            ('instructions', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True)),
+        ))
+        db.send_create_signal('indivo', ['Actions'])
+
+        # Adding model 'HealthActionPlan'
+        db.create_table('indivo_healthactionplan', (
+            ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            #('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('planType', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('plannedBy', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('datePlanned', self.gf('django.db.models.fields.DateTimeField')()),
+            ('dateExpires', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('indication', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('instructions', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True)),
+            ('system', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('system_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('system_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('system_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('actions', self.gf('django.db.models.fields.TextField')()),
+        ))
+        db.send_create_signal('indivo', ['HealthActionPlan'])
+
+        #############################################
+        # Adding models used for 'HealthActionResult'
+        #############################################
+
+        # Adding model 'MedicationAdministrations'
+        db.create_table('indivo_medicationadministrations', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('occurrence_id', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('dose', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('dose_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('dose_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('dose_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('route_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('route_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('route_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('route_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('route_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('route_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+        ))
+        db.send_create_signal('indivo', ['MedicationAdministrations'])
+
+        # Adding model 'DeviceResults'
+        db.create_table('indivo_deviceresults', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('occurrence_id', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('value_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('value_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('value_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('site', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('site_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('site_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('site_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+        ))
+        db.send_create_signal('indivo', ['DeviceResults'])
+
+        # Adding model 'Measurements'
+        db.create_table('indivo_measurements', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('occurrence_id', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('type_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('value_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('value_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('value_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('aggregationFunction', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('aggregationFunction_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('aggregationFunction_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('aggregationFunction_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+        ))
+        db.send_create_signal('indivo', ['Measurements'])
+
+        # Adding model 'StopConditionResults'
+        db.create_table('indivo_stopconditionresults', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('occurrence_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('value_textvalue', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_value', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('value_unit_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('value_unit_value', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('value_unit_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+        ))
+        db.send_create_signal('indivo', ['StopConditionResults'])
+
+        # Adding model 'Occurrences'
+        db.create_table('indivo_occurrences', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            ('action_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('startTime', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('endTime', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('additionalDetails', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True)),
+        ))
+        db.send_create_signal('indivo', ['Occurrences'])
+
+        # Adding model 'ActionResults'
+        db.create_table('indivo_actionresults', (
+            #('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            ('action_type', self.gf('django.db.models.fields.CharField')(max_length=17)),
+            ('state', self.gf('django.db.models.fields.CharField')(max_length=5)),
+            ('healthactionresult_id', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+        ))
+        db.send_create_signal('indivo', ['ActionResults'])
+
+        # Adding model 'HealthActionResult'
+        db.create_table('indivo_healthactionresult', (
+            ('fact_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['indivo.Fact'], unique=True, primary_key=True)),
+            #('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_value', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('name_abbrev', self.gf('django.db.models.fields.CharField')(max_length=20, null=True)),
+            ('planType', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('reportedBy', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('dateReported', self.gf('django.db.models.fields.DateTimeField')()),
+            ('actions', self.gf('django.db.models.fields.TextField')()),
+        ))
+        db.send_create_signal('indivo', ['HealthActionPlan'])
+
 
     def backwards(self, orm):
         
@@ -971,6 +1316,44 @@ class Migration(SchemaMigration):
 
         # Deleting model 'VideoMessage'
         db.delete_table('indivo_videomessage')
+
+        ########################################
+        # Deleting models for "HealthActionPlan"
+        ########################################
+
+        # Deleting model 'StopConditions'
+        db.delete_table('indivo_stopconditions')
+        # Deleting model 'Targets'
+        db.delete_table('indivo_targets')
+        # Deleting model 'MeasurementPlans'
+        db.delete_table('indivo_measurementplans')
+        # Deleting model 'DevicePlans'
+        db.delete_table('indivo_deviceplans')
+        # Deleting model 'MedicationPlans'
+        db.delete_table('indivo_medicationplans')
+        # Deleting model 'Action'
+        db.delete_table('indivo_actions')
+        # Deleting model 'HealthActionPlan'
+        db.delete_table('indivo_healthactionplan')
+
+        ########################################
+        # Deleting models for "HealthActionPlan"
+        ########################################
+        
+        # Deleting model 'MedicationAdministrations'
+        db.delete_table('indivo_medicationadministrations')
+        # Deleting model 'DeviceResults'
+        db.delete_table('indivo_deviceresults')
+        # Deleting model 'Measurements'
+        db.delete_table('indivo_measurements')
+        # Deleting model 'StopConditionResults'
+        db.delete_table('indivo_stopconditionresults')
+        # Deleting model 'Occurrences'
+        db.delete_table('indivo_occurrences')
+        # Deleting model 'ActionResults'
+        db.delete_table('indivo_actionresults')
+        # Deleting model 'HealthActionPlan'
+        db.delete_table('indivo_healthactionreult')
 
 
     models = {
@@ -1632,6 +2015,315 @@ class Migration(SchemaMigration):
             'from_str': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'storage_type': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'subject': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+        },
+        'indivo.StopConditions' : {
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'object_name': 'StopConditions'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'value_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'value_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'value_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'operator': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'operator_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'operator_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'operator_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'detail': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'detail_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'detail_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'detail_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+        },
+        'indivo.Targets' : {
+            'Meta': {'object_name': 'Targets'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'minimumValue_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'minimumValue_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'minimumValue_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'minimumValue_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'minimumValue_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'minimumValue_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'maximumValue_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'maximumValue_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'maximumValue_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'maximumValue_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'maximumValue_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'maximumValue_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'securityLevel': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'securityLevel_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'securityLevel_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'securityLevel_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+        },
+        'indivo.MeasurementPlans' : {
+            'Meta': {'object_name': 'MeasurementPlans'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'aggregationFunction': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'aggregationFunction_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'aggregationFunction_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'aggregationFunction_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+        },
+        'indivo.DevicePlans' : {
+            'Meta': {'object_name': 'DevicePlans'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'value_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'value_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'value_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'site': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'site_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'site_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'site_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'instructions': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True'}),
+        },
+        'indivo.MedicationPlans' : {
+            'Meta': {'object_name': 'MedicationPlans'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'indication': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'dose_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'dose_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'dose_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'dose_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'dose_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'dose_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'route': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'route_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'route_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'route_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+        },
+        'indivo.Actions' : {
+            'Meta': {'object_name': 'Actions'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            #'creator': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'notification_created_by'", 'null': 'True', 'to': "orm['indivo.Principal']"}),
+            'action_type' : ('django.db.models.fields.CharField', [], {'max_length': '11'}),
+            'state' : ('django.db.models.fields.CharField', [], {'max_length': '5'}),
+            'healthactionplan_id': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'position': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'position_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'position_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'position_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'repeatCount': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'additionalDetails': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True'}),
+            'instructions': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True'}),
+        },
+        'indivo.HealthActionPlan' : {
+            'Meta': {'object_name': 'HealthActionPlan', '_ormbases': ['indivo.Fact']},
+            'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            #'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'planType': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'plannedBy': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'datePlanned': ('django.db.models.fields.DateTimeField', [], {}),
+            'dateExpires': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'indication': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'instructions': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True'}),
+            'system': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'system_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'system_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'system_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'actions': ('django.db.models.fields.TextField', [], {}),
+        },
+        'indivo.MedicationAdministrations' : {
+            'Meta': {'object_name': 'MedicationAdministrations'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'occurrence_id': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'dose': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'dose_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'dose_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'dose_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'route_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'route_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'route_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'route_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'route_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'route_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+        },
+        'indivo.DeviceResults' : {
+            'Meta': {'object_name': 'DeviceResults'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'occurrence_id': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'value_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'value_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'value_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'site': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'site_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'site_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'site_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+        },
+        'indivo.Measurements' : {
+            'Meta': {'object_name': 'Measurements'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'occurrence_id': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'type_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'value_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'value_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'value_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'aggregationFunction': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'aggregationFunction_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'aggregationFunction_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'aggregationFunction_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+        },
+        'indivo.StopConditionResults' : {
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'object_name': 'StopConditionResults'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'occurrence_id': ('django.db.models.fields.IntegerField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'value_textvalue': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_value': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'value_unit_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'value_unit_value': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'value_unit_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+        },
+        'indivo.Occurrences' : {
+            'Meta': {'object_name': 'Occurrences'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            'action_id': ('django.db.models.fields.IntegerField', [], {}),
+            'startTime': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'endTime': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'additionalDetails': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True'}),
+        },
+        'indivo.ActionResults' : {
+            'Meta': {'object_name': 'ActionResults'},
+            #'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            #('creator', self.gf('django.db.models.fields.related.ForeignKey')(related_name='document_created_by', null=True, to=orm['indivo.Principal'])),
+            'action_type' : ('django.db.models.fields.CharField', [], {'max_length': '17'}),
+            'state' : ('django.db.models.fields.CharField', [], {'max_length': '5'}),
+            'healthactionplan_id': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+        },
+        'indivo.HealthActionResult' : {
+            'Meta': {'object_name': 'HealthActionResult', '_ormbases': ['indivo.Fact']},
+            'fact_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['indivo.Fact']", 'unique': 'True', 'primary_key': 'True'}),
+            #('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name_type': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_value': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'name_abbrev': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
+            'planType': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'reportedBy': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'dateReported': ('django.db.models.fields.DateTimeField', [], {}),
+            'actions': ('django.db.models.fields.TextField', [], {}),
         }
     }
 

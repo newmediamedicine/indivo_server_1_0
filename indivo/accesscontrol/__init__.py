@@ -287,6 +287,8 @@ def load_access_rules():
   views = [measurement_list,
            immunization_list,
            allergy_list,
+           healthactionplan_list,
+           healthactionresult_list,
            medication_list,
            medicationorder_list,
            medicationfill_list,

@@ -53,3 +53,17 @@ from fact_objects.videomessage          import VideoMessage
 from fact_objects.problem               import Problem
 from fact_objects.procedure             import Procedure
 from fact_objects.vitals                import Vitals
+from fact_objects.healthactionplan      import HealthActionPlan
+from fact_objects.healthactionplan      import Actions
+from fact_objects.healthactionplan      import StopConditions
+from fact_objects.healthactionplan      import Targets
+from fact_objects.healthactionplan      import MeasurementPlans
+from fact_objects.healthactionplan      import DevicePlans
+from fact_objects.healthactionplan      import MedicationPlans
+from fact_objects.healthactionresult    import HealthActionResult
+from fact_objects.healthactionresult    import ActionResults
+from fact_objects.healthactionresult    import Occurrences
+from fact_objects.healthactionresult    import StopConditionResults
+from fact_objects.healthactionresult    import Measurements
+from fact_objects.healthactionresult    import DeviceResults
+from fact_objects.healthactionresult    import MedicationAdministrations

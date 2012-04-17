@@ -33,6 +33,8 @@ from idp_objs.problem                   import IDP_Problem
 from idp_objs.procedure                 import IDP_Procedure
 from idp_objs.simple_clinical_note      import IDP_SimpleClinicalNote
 from idp_objs.vitals                    import IDP_Vitals
+from idp_objs.healthactionplan          import IDP_HealthActionPlan
+from idp_objs.healthactionresult        import IDP_HealthActionResult
 
 DP_DOBJ_PROCESS   = 'process'
 DP_DOBJ_POST_DATA = 'post_data'
@@ -53,7 +55,9 @@ DOC_CLASS_REL     = {
                   'http://indivo.org/vocab/xml/documents#VideoMessage'              :   {'class' : 'IDP_VideoMessage',    'stylesheet' : 'videomessage', 'schema' : 'videomessage'},
                   'http://indivo.org/vocab/xml/documents#Problem'       :   {'class' : 'IDP_Problem',       'stylesheet' : 'problem', 'schema' : 'problem'},
                   'http://indivo.org/vocab/xml/documents#Procedure'     :   {'class' : 'IDP_Procedure',     'stylesheet' : 'procedure', 'schema' : 'procedure'},
-                  'http://indivo.org/vocab/xml/documents#VitalSign'     :   {'class' : 'IDP_Vitals',        'stylesheet' : 'vitalsign', 'schema' : 'vitals'}
+                  'http://indivo.org/vocab/xml/documents#VitalSign'     :   {'class' : 'IDP_Vitals',        'stylesheet' : 'vitalsign', 'schema' : 'vitals'},
+                  'http://indivo.org/vocab/xml/documents#HealthActionPlan'     :   {'class' : 'IDP_HealthActionPlan',        'stylesheet' : 'healthactionplan', 'schema' : 'healthactionplan'},
+                  'http://indivo.org/vocab/xml/documents#HealthActionResult'     :   {'class' : 'IDP_HealthActionResult',        'stylesheet' : 'healthactionresult', 'schema' : 'healthactionresult'}
                 }
 
 DEFAULT_PREFIX= "http://indivo.org/vocab/xml/documents#"
@@ -214,7 +218,10 @@ class DocumentProcessing:
       # If dp_data_obj has a process method then use it
       # else use document_processing standard
       if hasattr(dp_data_obj, DP_DOBJ_PROCESS):
-        doc_data = dp_data_obj.process(self.root_node_name, self.transformed_dom)
+        if self.root_node_name in ('HealthActionPlan', 'HealthActionResult'):
+          doc_data = dp_data_obj.process(self.root_node_name, self.transformed_dom, self.content)
+        else:
+          doc_data = dp_data_obj.process(self.root_node_name, self.transformed_dom)
       else:
         doc_data = self.parse_standard_facts_doc(self.root_node_name, self.transformed_dom)
 

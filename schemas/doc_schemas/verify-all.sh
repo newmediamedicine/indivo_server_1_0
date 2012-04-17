@@ -16,3 +16,5 @@ python validate_xml_with_schema.py procedure.xsd procedure.xml
 python validate_xml_with_schema.py reporting.xsd reporting.xml
 python validate_xml_with_schema.py simplenote.xsd simplenote.xml
 python validate_xml_with_schema.py vitals.xsd vitals.xml
+python validate_xml_with_schema.py healthactionplan.xsd healthactionplan.xml
+python validate_xml_with_schema.py healthactionresult.xsd healthactionresult.xml

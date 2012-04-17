@@ -1,0 +1,8 @@
+{% load template_utils %}
+<HealthActionResult xmlns="http://indivo.org/vocab/xml/documents#">
+  <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+  <planType>{{ fobj.planType }}</planType>
+  <reportedBy>{{ fobj.reportedBy }}</reportedBy>
+  <dateReported>{{ fobj.dateReported|format_iso8601_datetime }}</dateReported>
+  {% autoescape off %}{{ fobj.actions }}{% endautoescape %}
+</HealthActionResult>
