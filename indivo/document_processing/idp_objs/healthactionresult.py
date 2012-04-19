@@ -30,8 +30,8 @@ class IDP_HealthActionResult:
                 clean_actions_xml = [tag.strip() for tag in actions_xml]
                 clean_actions_xml[0] = '<actions>'
                 new_fact['actions_xml'] = ''.join(clean_actions_xml)
-                new_fact['actions_xml'] = new_fact['actions_xml'].replace('<action xsi:type="ActionGroupResult">', '<action type="ActionGroupResult">')
-                new_fact['actions_xml'] = new_fact['actions_xml'].replace('<action xsi:type="ActionStepResult">', '<action type="ActionStepResult">')
+                #new_fact['actions_xml'] = new_fact['actions_xml'].replace('<action xsi:type="ActionGroupResult">', '<action type="ActionGroupResult">')
+                #new_fact['actions_xml'] = new_fact['actions_xml'].replace('<action xsi:type="ActionStepResult">', '<action type="ActionStepResult">')
                 retval_facts.append(new_fact)
 
         if retval_facts:
