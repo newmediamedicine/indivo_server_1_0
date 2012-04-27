@@ -25,5 +25,10 @@ from procedure                  import *
 from simple_clinical_notes      import *
 from vitals                     import *
 from ccr                        import *
+from device                     import *
+from healthmeasurement          import *
+from medicationschedule         import *
+from healthactionoccurrence     import *
+from healthactionschedule       import *
 from healthactionplan           import *
 from healthactionresult         import *

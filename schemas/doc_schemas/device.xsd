@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!--~
-  ~ Copyright 2011 John Moore, Scott Gilroy
+  ~ Copyright 2012 John Moore, Scott Gilroy
   ~
   ~ This file is part of CollaboRhythm.
   ~
@@ -21,64 +21,78 @@
 		   elementFormDefault="qualified">
 
 	<xs:include schemaLocation="codes.xsd"/>
-	<xs:include schemaLocation="provider.xsd"/>
-	<xs:include schemaLocation="values.xsd"/>
 
-	<xs:complexType name="VideoMessage">
+	<xs:complexType name="Device">
 		<xs:sequence>
-			<xs:element name="fileId" type="xs:string" minOccurs="1" maxOccurs="1">
+			<xs:element name="name" type="indivo:CodedValue" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation xml:lang="en">
-						ID of the video file
+						Name of the device
+						Fora D40d for example
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="storageType" type="xs:string" minOccurs="1" maxOccurs="1">
+			<xs:element name="id" type="indivo:CodedValue" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation xml:lang="en">
-						Type of video file storage, for example ?FlashMediaServer?
+						Unique id associated with this piece of equipment
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="subject" type="xs:string" minOccurs="1" maxOccurs="1">
+			<xs:element name="type" type="indivo:CodedValue" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation xml:lang="en">
-						Subject of the message
+						Category of equipment
+						sphygmomanometer for example
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="from" type="xs:string" minOccurs="1" maxOccurs="1">
+			<xs:element name="indication" type="xs:string" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation xml:lang="en">
-						Person that sent the video message
+						Reason for the device
+						Devices can also be related to problems, but some devices, such as a pedometer does not need to
+						be related to a problem
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dateRecorded" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+			<xs:element name="vendor" type="indivo:CodedValue" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation xml:lang="en">
-						Date and time that the video message was recorded
+						Company that manufactures the device
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dateSent" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+			<xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation xml:lang="en">
-						Date and time that the video message was sent
+						Description of this device
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="specification" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+						Potentially specific specifications that the device meets
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="certification" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+						Potentially the type of FDA or other certification associated with the device
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-
-	<xs:element name="VideoMessage" type="indivo:VideoMessage">
+	<xs:element name="Device" type="indivo:Device">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">
-				It is possible to send video messages to patients using the collaborative workstation. Currently they
-				are stored on the flash media server. The VideoMessage document allows the mobile application to know
-				what videos are available for a given patient.
+				Durable health device. Each Device document should be related from any HealthActionPlan that uses it
+				with the ?device? relationship type and from any appropriate Measurement documents using the ?source?
+				relationship type.
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-
 </xs:schema>

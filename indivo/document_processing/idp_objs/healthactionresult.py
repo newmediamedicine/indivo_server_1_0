@@ -19,6 +19,9 @@ class IDP_HealthActionResult:
 
         hap = etree.XML(original_xml)
         actions_element = hap.find('{http://indivo.org/vocab/xml/documents#}actions')
+        # force the actions_element subtree to contain newlines after each element
+        xml_str = etree.tostring(actions_element, pretty_print=True, method="xml")
+        actions_element = etree.XML(xml_str)
 
         # if there is a DOM, use etree find
         if xmldom is not None:

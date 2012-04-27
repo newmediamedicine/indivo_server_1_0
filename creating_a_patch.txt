@@ -1,0 +1,35 @@
+*   Grab initial commit of indivo_server 1.0 and extract to /tmp/PatchWork
+
+    https://github.com/fyoung/indivo_server_1_0/zipball/3f85dc72a08d4635df344dc46316b8fc6f4d822f
+
+*   Copy /indivo/indivo_server to /tmp/PatchWork
+
+*   Clean /tmp/PatchWork/indivo_server source tree
+
+    find . -name "*.pyc" -exec rm '{}' ';'
+
+*   Remove .git and .gitignore from both source trees if they exist
+
+*   from /tmp/PatchWork generate patch
+
+    diff --exclude=files -Naur fyoung-indivo_server_1_0-3f85dc7 indivo_server > indivo_server_patch.diff
+
+
+-= What follows is relevent to Joslin Diabetes Clinic =-
+
+*   Grab the CHB version of indivo_server v1.0.0 but don't make any code changes
+
+    cd /desired/install/directory
+    git clone git://github.com/chb/indivo_server.git
+    cd indivo_server
+    git submodule init
+    git submodule update
+    git checkout v1.0.0
+
+*   Copy indivo_server_patch.diff to CHB version of indivo_server 1.0
+
+*   Apply patch
+
+    patch -p1 -i indivo_server_patch.diff
+
+*   Edit settings.py and utils/indivo_data.xml as needed

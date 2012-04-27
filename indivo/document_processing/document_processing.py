@@ -35,6 +35,11 @@ from idp_objs.simple_clinical_note      import IDP_SimpleClinicalNote
 from idp_objs.vitals                    import IDP_Vitals
 from idp_objs.healthactionplan          import IDP_HealthActionPlan
 from idp_objs.healthactionresult        import IDP_HealthActionResult
+from idp_objs.healthactionoccurrence    import IDP_HealthActionOccurrence
+from idp_objs.healthactionschedule      import IDP_HealthActionSchedule
+from idp_objs.device                    import IDP_Device
+from idp_objs.healthmeasurement         import IDP_HealthMeasurement
+from idp_objs.medicationschedule        import IDP_MedicationSchedule
 
 DP_DOBJ_PROCESS   = 'process'
 DP_DOBJ_POST_DATA = 'post_data'
@@ -57,7 +62,12 @@ DOC_CLASS_REL     = {
                   'http://indivo.org/vocab/xml/documents#Procedure'     :   {'class' : 'IDP_Procedure',     'stylesheet' : 'procedure', 'schema' : 'procedure'},
                   'http://indivo.org/vocab/xml/documents#VitalSign'     :   {'class' : 'IDP_Vitals',        'stylesheet' : 'vitalsign', 'schema' : 'vitals'},
                   'http://indivo.org/vocab/xml/documents#HealthActionPlan'     :   {'class' : 'IDP_HealthActionPlan',        'stylesheet' : 'healthactionplan', 'schema' : 'healthactionplan'},
-                  'http://indivo.org/vocab/xml/documents#HealthActionResult'     :   {'class' : 'IDP_HealthActionResult',        'stylesheet' : 'healthactionresult', 'schema' : 'healthactionresult'}
+                  'http://indivo.org/vocab/xml/documents#HealthActionResult'     :   {'class' : 'IDP_HealthActionResult',        'stylesheet' : 'healthactionresult', 'schema' : 'healthactionresult'},
+                  'http://indivo.org/vocab/xml/documents#HealthActionOccurrence'     :   {'class' : 'IDP_HealthActionOccurrence',        'stylesheet' : 'healthactionoccurrence', 'schema' : 'healthactionoccurrence'},
+                  'http://indivo.org/vocab/xml/documents#HealthActionSchedule'     :   {'class' : 'IDP_HealthActionSchedule',        'stylesheet' : 'healthactionschedule', 'schema' : 'healthactionschedule'},
+                  'http://indivo.org/vocab/xml/documents#Device'     :   {'class' : 'IDP_Device',        'stylesheet' : 'device', 'schema' : 'device'},
+                  'http://indivo.org/vocab/xml/documents#HealthMeasurement'     :   {'class' : 'IDP_HealthMeasurement',        'stylesheet' : 'healthmeasurement', 'schema' : 'healthmeasurement'},
+                  'http://indivo.org/vocab/xml/documents#MedicationSchedule'     :   {'class' : 'IDP_MedicationSchedule',        'stylesheet' : 'medicationschedule', 'schema' : 'medicationschedule'}
                 }
 
 DEFAULT_PREFIX= "http://indivo.org/vocab/xml/documents#"

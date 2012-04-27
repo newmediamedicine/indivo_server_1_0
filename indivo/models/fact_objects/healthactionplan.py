@@ -98,7 +98,7 @@ class DevicePlans(ActionObject):
     site_type = models.CharField(max_length=200, null=True)
     site_value = models.CharField(max_length=200, null=True)
     site_abbrev = models.CharField(max_length=20, null=True)
-    instructions = models.CharField(max_length=1000, null=True)
+    instructions = models.TextField(null=True)
 
     def __unicode__(self):
         return "DevicePlans: %s" % (self.id, )
@@ -146,7 +146,7 @@ class Actions(ActionObject):
     type_value = models.CharField(max_length=200, null=True)
     type_abbrev = models.CharField(max_length=20, null=True)
     additionalDetails = models.CharField(max_length=1000, null=True)
-    instructions = models.CharField(max_length=1000, null=True)
+    instructions = models.TextField(null=True)
 
     def __unicode__(self):
         return "Actions: %s" % (self.id, )

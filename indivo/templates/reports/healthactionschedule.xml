@@ -1,0 +1,35 @@
+{% load template_utils %}
+<HealthActionSchedule xmlns="http://indivo.org/vocab/xml/documents#">
+  <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+  <scheduledBy>{{ fobj.scheduled_by }}</scheduledBy>
+  <dateScheduled>{{ fobj.date_scheduled|format_iso8601_datetime }}</dateScheduled>
+  <dateStart>{{ fobj.date_start|format_iso8601_datetime }}</dateStart>
+  {% if fobj.date_end %}
+  <dateEnd>{{ fobj.date_end|format_iso8601_datetime }}</dateEnd>
+  {% endif %}
+  {% if fobj.recurrenceRule_frequency %}
+  <recurrenceRule>
+    <frequency{% if fobj.recurrenceRule_frequency_type %} type="{{ fobj.recurrenceRule_frequency_type }}" value="{{ fobj.recurrenceRule_frequency_value }}"{% if fobj.recurrenceRule_frequency_abbrev %} abbrev="{{ fobj.recurrenceRule_frequency_abbrev }}"{% endif %}{% endif %}>{{ fobj.recurrenceRule_frequency }}</frequency>
+    {% if fobj.recurrenceRule_interval %}
+    <interval{% if fobj.recurrenceRule_interval_type %} type="{{ fobj.recurrenceRule_interval_type }}" value="{{ fobj.recurrenceRule_interval_value }}"{% if fobj.recurrenceRule_frequency_abbrev %} abbrev="{{ fobj.recurrenceRule_interval_abbrev }}"{% endif %}{% endif %}>{{ fobj.recurrenceRule_interval }}</interval>
+    {% endif %}
+    {% if fobj.recurrenceRule_count %}
+    <count>{{ fobj.recurrenceRule_count }}</count>
+    {% endif %}
+  </recurrenceRule>
+  {% endif %}
+  <dose>
+    {% if fobj.dose_value %}
+    <value>{{ fobj.dose_value }}</value>
+    {% endif %}
+    {% if fobj.dose_textvalue %}
+    <textValue>{{ fobj.dose_textvalue }}</textValue>
+    {% endif %}
+    {% if fobj.dose_unit %}
+    <unit{% if fobj.dose_unit_type %} type="{{ fobj.dose_unit_type }}" value="{{ fobj.dose_unit_value }}"{% if fobj.dose_unit_abbrev %} abbrev="{{ fobj.dose_unit_abbrev }}"{% endif %}{% endif %}>{{ fobj.dose_unit }}</unit>
+    {% endif %}
+  </dose>
+  {% if fobj.instructions %}
+  <instructions>{{ fobj.instructions }}</instructions>
+  {% endif %}
+</HealthActionSchedule>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<facts xmlns:indivodoc="http://indivo.org/vocab/xml/documents#">
+   <fact>
+      <name>Average Blood Pressure</name>
+      <name_type/>
+      <name_value/>
+      <name_abbrev/>
+      <scheduledBy>jking@records.media.mit.edu</scheduledBy>
+      <dateScheduled>2011-02-14T13:00:00-04:00</dateScheduled>
+      <dateStart>2011-02-15T10:00:00-04:00</dateStart>
+      <dateEnd>2011-02-15T14:00:00-04:00</dateEnd>
+      <recurrenceRule_frequency>DAILY</recurrenceRule_frequency>
+      <recurrenceRule_frequency_type/>
+      <recurrenceRule_frequency_value/>
+      <recurrenceRule_frequency_abbrev/>
+      <recurrenceRule_count>30</recurrenceRule_count>
+      <dose_value>145</dose_value>
+      <dose_unit>millimeters of almond milk</dose_unit>
+      <dose_unit_type>http://codes.indivo.org/units/</dose_unit_type>
+      <dose_unit_value>31</dose_unit_value>
+      <dose_unit_abbrev/>
+      <instructions/>
+   </fact>
+</facts>

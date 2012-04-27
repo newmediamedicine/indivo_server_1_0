@@ -1,0 +1,25 @@
+{% load template_utils %}
+<Device xmlns="http://indivo.org/vocab/xml/documents#">
+    <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+    {% if fobj.identity %}
+    <id{% if fobj.identity_type %} type="{{ fobj.identity_type }}" value="{{ fobj.identity_value }}"{% if fobj.identity_abbrev %} abbrev="{{ fobj.identity_abbrev }}"{% endif %}{% endif %}>{{ fobj.identity }}</id>
+    {% endif %}
+    {% if fobj.type %}
+    <type{% if fobj.type_type %} type="{{ fobj.type_type }}" value="{{ fobj.type_value }}"{% if fobj.type_abbrev %} abbrev="{{ fobj.type_abbrev }}"{% endif %}{% endif %}>{{ fobj.type }}</type>
+    {% endif %}
+    {% if fobj.indication %}
+    <indication>{{ fobj.indication }}</indication>
+    {% endif %}
+    {% if fobj.vendor %}
+    <vendor{% if fobj.vendor_type %} type="{{ fobj.vendor_type }}" value="{{ fobj.vendor_value }}"{% if fobj.vendor_abbrev %} abbrev="{{ fobj.vendor_abbrev }}"{% endif %}{% endif %}>{{ fobj.vendor }}</vendor>
+    {% endif %}
+    {% if fobj.description %}
+    <description>{{ fobj.description }}</description>
+    {% endif %}
+    {% if fobj.specification %}
+    <specification>{{ fobj.specification }}</specification>
+    {% endif %}
+    {% if fobj.certification %}
+    <certification>{{ fobj.certification }}</certification>
+    {% endif %}
+</Device>

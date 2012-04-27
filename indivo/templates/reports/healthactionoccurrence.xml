@@ -1,0 +1,7 @@
+{% load template_utils %}
+<HealthActionOccurrence xmlns="http://indivo.org/vocab/xml/documents#">
+    <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
+    {% if fobj.recurrenceIndex %}
+    <recurrenceIndex>{{ fobj.recurrenceIndex }}</recurrenceIndex>
+    {% endif %}
+</HealthActionOccurrence>
