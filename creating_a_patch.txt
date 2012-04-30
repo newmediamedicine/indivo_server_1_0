@@ -2,7 +2,7 @@
 
     https://github.com/fyoung/indivo_server_1_0/zipball/3f85dc72a08d4635df344dc46316b8fc6f4d822f
 
-*   Copy /indivo/indivo_server to /tmp/PatchWork
+*   Copy folder ~/indivo/indivo_server to /tmp/PatchWork
 
 *   Clean /tmp/PatchWork/indivo_server source tree
 
