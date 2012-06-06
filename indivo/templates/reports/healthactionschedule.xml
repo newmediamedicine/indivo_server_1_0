@@ -1,11 +1,11 @@
 {% load template_utils %}
 <HealthActionSchedule xmlns="http://indivo.org/vocab/xml/documents#">
   <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}"{% if fobj.name_abbrev %} abbrev="{{ fobj.name_abbrev }}"{% endif %}{% endif %}>{{ fobj.name }}</name>
-  <scheduledBy>{{ fobj.scheduled_by }}</scheduledBy>
-  <dateScheduled>{{ fobj.date_scheduled|format_iso8601_datetime }}</dateScheduled>
-  <dateStart>{{ fobj.date_start|format_iso8601_datetime }}</dateStart>
-  {% if fobj.date_end %}
-  <dateEnd>{{ fobj.date_end|format_iso8601_datetime }}</dateEnd>
+  <scheduledBy>{{ fobj.scheduledBy }}</scheduledBy>
+  <dateScheduled>{{ fobj.dateScheduled|format_iso8601_datetime }}</dateScheduled>
+  <dateStart>{{ fobj.dateStart|format_iso8601_datetime }}</dateStart>
+  {% if fobj.dateEnd %}
+  <dateEnd>{{ fobj.dateEnd|format_iso8601_datetime }}</dateEnd>
   {% endif %}
   {% if fobj.recurrenceRule_frequency %}
   <recurrenceRule>
@@ -18,17 +18,6 @@
     {% endif %}
   </recurrenceRule>
   {% endif %}
-  <dose>
-    {% if fobj.dose_value %}
-    <value>{{ fobj.dose_value }}</value>
-    {% endif %}
-    {% if fobj.dose_textvalue %}
-    <textValue>{{ fobj.dose_textvalue }}</textValue>
-    {% endif %}
-    {% if fobj.dose_unit %}
-    <unit{% if fobj.dose_unit_type %} type="{{ fobj.dose_unit_type }}" value="{{ fobj.dose_unit_value }}"{% if fobj.dose_unit_abbrev %} abbrev="{{ fobj.dose_unit_abbrev }}"{% endif %}{% endif %}>{{ fobj.dose_unit }}</unit>
-    {% endif %}
-  </dose>
   {% if fobj.instructions %}
   <instructions>{{ fobj.instructions }}</instructions>
   {% endif %}

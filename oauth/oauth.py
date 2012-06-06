@@ -482,6 +482,7 @@ class OAuthRequest(object):
           type = OAuthRequest.ACCESS_TOKEN
         else:
           # a token was present, but it was not found in the system, that's bad, throw an error
+          logging.debug("consumer %s token %s" % consumer, token_str)
           report_error("a token was declared in the request but not found in the store")
 
     # create the request and manually set its oauth_parameters
