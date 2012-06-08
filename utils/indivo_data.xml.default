@@ -46,6 +46,16 @@
     <document_schema type='http://indivo.org/vocab/xml/documents#VitalSign' />
     <document_schema type='http://indivo.org/vocab/xml/documents#EncryptedDocument' />
     <document_schema type='http://indivo.org/vocab/xml/documents#Genotype' />
+    <document_schema type='http://indivo.org/vocab/documentrels#healthActionSchedule' />
+    <document_schema type='http://indivo.org/vocab/documentrels#unscheduledResult' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#HealthActionSchedule' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#HealthActionOccurrence' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#Device' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#AdherenceItem' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#HealthMeasurement' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#MedicationSchedule' />
+    <document_schema type='http://indivo.org/vocab/xml/documents/healthActionPlan#HealthActionPlan' />
+    <document_schema type='http://indivo.org/vocab/xml/documents/healthActionResult#HealthActionResult' />
   </document_schemas>
   <machine_apps>
     <machine_app name='Sample Admin App' email='sample_admin_app@apps.indivo.org'>

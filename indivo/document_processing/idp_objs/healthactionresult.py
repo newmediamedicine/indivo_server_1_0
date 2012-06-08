@@ -18,7 +18,7 @@ class IDP_HealthActionResult:
         retval_facts = []
 
         hap = etree.XML(original_xml)
-        actions_element = hap.find('{http://indivo.org/vocab/xml/documents#}actions')
+        actions_element = hap.find('{http://indivo.org/vocab/xml/documents/healthActionResult#}actions')
         # force the actions_element subtree to contain newlines after each element
         xml_str = etree.tostring(actions_element, pretty_print=True, method="xml")
         actions_element = etree.XML(xml_str)

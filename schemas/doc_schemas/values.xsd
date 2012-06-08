@@ -2,7 +2,9 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://indivo.org/vocab/xml/documents#"
 	   xmlns:indivo="http://indivo.org/vocab/xml/documents#" elementFormDefault="qualified">
 
-  <xs:complexType name="Range">
+    <xs:include schemaLocation="codes.xsd" />
+
+    <xs:complexType name="Range">
     <xs:sequence>
       <!-- a missing minimum means < max -->
       <xs:element name="minimum" type="xs:double" minOccurs="0" maxOccurs="1" />

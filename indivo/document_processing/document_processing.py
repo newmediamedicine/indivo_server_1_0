@@ -61,8 +61,8 @@ DOC_CLASS_REL     = {
                   'http://indivo.org/vocab/xml/documents#Problem'       :   {'class' : 'IDP_Problem',       'stylesheet' : 'problem', 'schema' : 'problem'},
                   'http://indivo.org/vocab/xml/documents#Procedure'     :   {'class' : 'IDP_Procedure',     'stylesheet' : 'procedure', 'schema' : 'procedure'},
                   'http://indivo.org/vocab/xml/documents#VitalSign'     :   {'class' : 'IDP_Vitals',        'stylesheet' : 'vitalsign', 'schema' : 'vitals'},
-                  'http://indivo.org/vocab/xml/documents#HealthActionPlan'     :   {'class' : 'IDP_HealthActionPlan',        'stylesheet' : 'healthactionplan', 'schema' : 'healthactionplan'},
-                  'http://indivo.org/vocab/xml/documents#HealthActionResult'     :   {'class' : 'IDP_HealthActionResult',        'stylesheet' : 'healthactionresult', 'schema' : 'healthactionresult'},
+                  'http://indivo.org/vocab/xml/documents/healthActionPlan#HealthActionPlan'     :   {'class' : 'IDP_HealthActionPlan',        'stylesheet' : 'healthactionplan', 'schema' : 'healthactionplan'},
+                  'http://indivo.org/vocab/xml/documents/healthActionResult#HealthActionResult'     :   {'class' : 'IDP_HealthActionResult',        'stylesheet' : 'healthactionresult', 'schema' : 'healthactionresult'},
                   'http://indivo.org/vocab/xml/documents#HealthActionOccurrence'     :   {'class' : 'IDP_HealthActionOccurrence',        'stylesheet' : 'healthactionoccurrence', 'schema' : 'healthactionoccurrence'},
                   'http://indivo.org/vocab/xml/documents#HealthActionSchedule'     :   {'class' : 'IDP_HealthActionSchedule',        'stylesheet' : 'healthactionschedule', 'schema' : 'healthactionschedule'},
                   'http://indivo.org/vocab/xml/documents#Device'     :   {'class' : 'IDP_Device',        'stylesheet' : 'device', 'schema' : 'device'},
@@ -172,7 +172,7 @@ class DocumentProcessing:
     # We're only looking at the top level, to avoid slow reparsing the entire document
     schema_etree = etree.XML(xsd_doc)
     for el in schema_etree.iterchildren():
-      if hasattr(el.tag, 'endswith') and el.tag.endswith("include"):
+      if hasattr(el.tag, 'endswith') and (el.tag.endswith("include") or el.tag.endswith("import")):
         include_file = el.get("schemaLocation")
         # This only works for one-level calls--if there are chained includes, this still fails
         el.set("schemaLocation", "%s%s"%(settings.XSD_SCHEMA_LOC, include_file))
