@@ -1,5 +1,7 @@
 {% load template_utils %}<AdherenceItem xmlns="http://indivo.org/vocab/xml/documents#">
-  <name>{{ fobj.name }}</name>
+  {% if fobj.name %}
+    <name{% if fobj.name_type %} type="{{ fobj.name_type }}" value="{{ fobj.name_value }}" abbrev="{{ fobj.name_abbrev|check_empty }}"{% endif %}>{{ fobj.name }}</name>
+  {% endif %}
   <reportedBy>{{ fobj.reported_by }}</reportedBy>
   <dateReported>{{ fobj.date_reported|format_iso8601_datetime }}</dateReported>
   {% if fobj.recurrence_index %}
