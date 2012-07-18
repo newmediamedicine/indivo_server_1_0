@@ -32,8 +32,8 @@ def account_send_message(request, account):
 
   request.POST may contain any of:
 
-  * *message_id*: An external identifier for the message, used for later
-    retrieval. Defaults to ``None``.
+  * *message_id*: An external identifier for the message, used for idempotent sends.
+    Defaults to ``None``.
 
   * *subject*: The message subject. Defaults to ``[no subject]``.
 
@@ -50,7 +50,7 @@ def account_send_message(request, account):
   
   """
 
-  Message.objects.create( 
+  message = Message.objects.create( 
     account             = account, 
     sender              = request.principal, 
     recipient           = account, 
@@ -60,7 +60,7 @@ def account_send_message(request, account):
     severity            = request.POST.get('severity', 'low'))
   
   account.notify_account_of_new_message()
-  return DONE
+  return render_template('_message', {'message' : message})
 
 @transaction.commit_manually
 @handle_integrity_error('Duplicate external id. Each message requires a unique message_id')
@@ -88,11 +88,11 @@ def send_account_message(request, account):
   passed *message_id* is a duplicate.
   """
   try:
-    Message.objects.create( 
-      account             = account, 
+    message = Message.objects.create(
+      account             = account,
       sender              = request.principal,
-      recipient           = account, 
-      external_identifier = request.POST.get('message_id', None), 
+      recipient           = account,
+      external_identifier = request.POST.get('message_id', None),
       subject             = _get_subject(request),
       body                = request.POST.get('body', "[no body]"),
       severity            = request.POST.get('severity', 'low'))
@@ -102,7 +102,7 @@ def send_account_message(request, account):
     return HttpResponseBadRequest('Duplicate external id: %s. Each message requires a unique message_id'%message_id)
   else:
     transaction.commit()
-    return DONE
+    return render_template('_message', {'message' : message})
 
 @transaction.commit_on_success
 @handle_integrity_error('Duplicate external id. Each message requires a unique message_id')
@@ -126,6 +126,9 @@ def record_send_message(request, record, message_id):
 
   * *severity*: The importance of the message. Options are ``low``, ``medium``,
     ``high``. Defaults to ``low``.
+
+  *message_id*: An external identifier for the message, used for idempotent sends.
+    Defaults to ``None``.
 
   After delivering the message to the Indivo inbox of all accounts authorized to
   view messages for the passed *record*, this call will send an email to each 
@@ -157,6 +160,8 @@ def record_message_attach(request, record, message_id, attachment_num):
   Message objects.
 
   request.POST must contain the raw XML attachment data.
+
+  *message_id*: The external identifier of the message to add the attachment to
 
   Will return :http:statuscode:`200` on success, :http:statuscode:`400` if the
   attachment with number *attachment_num* has already been uploaded.
@@ -202,10 +207,7 @@ def account_inbox_message(request, account, message_id):
   extraneous HTML, then converted to HTML content. Also, this
   call marks the message as read.
 
-  *message_id* should be the external identifier of the message
-  as created by 
-  :py:meth:`~indivo.views.messaging.account_send_message` or
-  :py:meth:`~indivo.views.messaging.record_send_message`.
+  *message_id* should be the internal identifier of the message
 
   Will return :http:statuscode:`200` with XML describing the message
   (id, sender, dates received, read, and archived, subject, body,
