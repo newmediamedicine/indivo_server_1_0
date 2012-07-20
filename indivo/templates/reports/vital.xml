@@ -15,7 +15,7 @@
     <textValue>{{ fobj.result_textvalue }}</textValue>
     {% endif %}
     {% if fobj.result_unit %}
-    <unit{% if fobj.result_unit_type %} type="{{ fobj.result_unit_type }}" value="{{ fobj.result_unit_value }}"{% if fobj.result_unit_abbrev %} abbrev="{{ fobj.result_unit_abbrev }}"{% endif %}{% endif %}>{{ fobj.result_unit }}</unit>
+    <unit{% if fobj.result_unit_type %} type="{{ fobj.result_unit_type }}"{% endif %}{% if fobj.result_unit_value %} value="{{ fobj.result_unit_value }}"{% endif %}{% if fobj.result_unit_abbrev %} abbrev="{{ fobj.result_unit_abbrev }}"{% endif %}>{{ fobj.result_unit }}</unit>
     {% endif %}
   </result>
   {% if fobj.site %}

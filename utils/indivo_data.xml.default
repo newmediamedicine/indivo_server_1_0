@@ -46,6 +46,8 @@
     <document_schema type='http://indivo.org/vocab/xml/documents#VitalSign' />
     <document_schema type='http://indivo.org/vocab/xml/documents#EncryptedDocument' />
     <document_schema type='http://indivo.org/vocab/xml/documents#Genotype' />
+    <document_schema type='http://indivo.org/vocab/documentrels#triggeredHealthActionResult' />
+    <document_schema type='http://indivo.org/vocab/documentrels#measurement' />
     <document_schema type='http://indivo.org/vocab/documentrels#healthActionSchedule' />
     <document_schema type='http://indivo.org/vocab/documentrels#unscheduledResult' />
     <document_schema type='http://indivo.org/vocab/xml/documents#HealthActionSchedule' />
