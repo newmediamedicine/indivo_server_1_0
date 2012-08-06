@@ -67,7 +67,7 @@
             </xs:annotation>
             <xs:complexType>
                 <xs:sequence>
-                    <xs:element name="action" type="result:ActionResult" minOccurs="1" maxOccurs="unbounded">
+                    <xs:element name="action" type="result:ActionResult" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation xml:lang="en">Instance of an action of the type ActionGroupResult or
                                 ActionStepResult. Required
@@ -90,7 +90,7 @@
             </xs:annotation>
             <xs:complexType>
                 <xs:sequence>
-                    <xs:element name="measurement" type="result:Measurement" minOccurs="1" maxOccurs="unbounded"/>
+                    <xs:element name="measurement" type="result:Measurement" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:complexType>
         </xs:element>
@@ -101,7 +101,7 @@
             </xs:annotation>
             <xs:complexType>
                 <xs:sequence>
-                    <xs:element name="deviceResult" type="result:DeviceResult" minOccurs="1" maxOccurs="unbounded">
+                    <xs:element name="deviceResult" type="result:DeviceResult" minOccurs="0" maxOccurs="unbounded">
                     </xs:element>
                 </xs:sequence>
             </xs:complexType>
@@ -138,7 +138,7 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="action" type="result:ActionResult" minOccurs="1"
+                            <xs:element name="action" type="result:ActionResult" minOccurs="0"
                                         maxOccurs="unbounded">
                                 <xs:annotation>
                                     <xs:documentation xml:lang="en">Instance of an action of the type
@@ -172,7 +172,7 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="occurrence" type="result:Occurrence" minOccurs="1"
+                            <xs:element name="occurrence" type="result:Occurrence" minOccurs="0"
                                         maxOccurs="unbounded">
                             </xs:element>
                         </xs:sequence>
@@ -313,7 +313,7 @@
             </xs:annotation>
             <xs:complexType>
                 <xs:sequence>
-                    <xs:element name="measurement" type="result:Measurement" minOccurs="1" maxOccurs="unbounded"/>
+                    <xs:element name="measurement" type="result:Measurement" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:complexType>
         </xs:element>
@@ -324,7 +324,7 @@
             </xs:annotation>
             <xs:complexType>
                 <xs:sequence>
-                    <xs:element name="deviceResult" type="result:DeviceResult" minOccurs="1" maxOccurs="unbounded">
+                    <xs:element name="deviceResult" type="result:DeviceResult" minOccurs="0" maxOccurs="unbounded">
                     </xs:element>
                 </xs:sequence>
             </xs:complexType>
