@@ -31,7 +31,10 @@ class IDP_HealthActionResult:
                 new_fact['actions'] = etree.tostring(fact.find('actions'))
                 actions_xml = etree.tostring(actions_element).split('\n')
                 clean_actions_xml = [tag.strip() for tag in actions_xml]
-                clean_actions_xml[0] = '<actions>'
+                if len(clean_actions_xml) == 1:
+                    clean_actions_xml[0] = '<actions/>'
+                else:
+                    clean_actions_xml[0] = '<actions>'
                 new_fact['actions_xml'] = ''.join(clean_actions_xml)
                 #new_fact['actions_xml'] = new_fact['actions_xml'].replace('<action xsi:type="ActionGroupResult">', '<action type="ActionGroupResult">')
                 #new_fact['actions_xml'] = new_fact['actions_xml'].replace('<action xsi:type="ActionStepResult">', '<action type="ActionStepResult">')
