@@ -2,6 +2,7 @@
 {% load template_utils %}<?xml version="1.0" encoding="utf-8" ?>
 <Message id="{{message.id}}">
   <sender>{{message.sender.email}}</sender>
+  {% if message.recipient %}<recipient>{{message.recipient.email}}</recipient>{% endif %}
   <received_at>{{message.received_at|format_iso8601_datetime}}</received_at>
   {% if sent_view %}
     {% if message.sent_read_at %}<read_at>{{message.sent_read_at|format_iso8601_datetime}}</read_at>{% endif %}
