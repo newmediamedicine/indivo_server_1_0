@@ -42,8 +42,8 @@
 					<xs:documentation xml:lang="en">
 						Type of medication order
 						All medications are ordered in some capacity, whether it is prescribed by a health professional,
-						recommended by a professional or a friend, or self-prescribed. Possible values are ?Prescribed?,
-						?Recommended?, or ?Self-prescribed.? Note that some patients self-prescribe medications
+						recommended by a professional or a friend, or self-prescribed. Possible values are "Prescribed",
+						"Recommended", or "Self-prescribed." Note that some patients self-prescribe medications
 						illegally as well as over-the-counter.
 					</xs:documentation>
 				</xs:annotation>
@@ -125,12 +125,12 @@
 	<xs:element name="MedicationOrder" type="indivo:MedicationOrder">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">
-				A MedicationOrder document is created every time that a medication is ?ordered?, meaning that it is
+				A MedicationOrder document is created every time that a medication is "ordered", meaning that it is
 				prescribed by a provider (for prescription drugs), recommended by a health care provider, friend, etc.
 				(for over-the-counter medications), or patient self-prescribed (for over-the-counter or illegal
 				medications). A MedicationOrder document should relate to its MedicationFIll document using the
-				?medicationFill? relationship type and to its HealthActionSchedule (MedicationSchedule for now)
-				documents using the ?healthActionSchedule? relationship type.
+				"medicationFill" relationship type and to its HealthActionSchedule (MedicationSchedule for now)
+				documents using the "healthActionSchedule" relationship type.
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
