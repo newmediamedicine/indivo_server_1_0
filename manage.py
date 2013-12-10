@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 from django.core.management import execute_manager
+#from pydev import pydevd
+
+#pydevd.settrace('revivan.media.mit.edu', port=51234, stdoutToServer=True, stderrToServer=True, suspend=False)
 try:
     import settings # Assumed to be in the same directory.
 except ImportError:
