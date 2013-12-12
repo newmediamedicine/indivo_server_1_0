@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1137908316">
+    <data-source source="LOCAL" name="Django default" uuid="797eb20e-f70c-494d-8526-2ff859c8c6ac">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:indivo</jdbc-url>
+      <user-name>indivo</user-name>
+      <user-password>dfd8df9edff1dfeedfd8dfdedfc8df96df91dff7df8bdfccdfd8dfd9dfc6</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
