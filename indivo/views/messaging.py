@@ -191,12 +191,15 @@ def account_inbox(request, account, limit, offset, status, order_by):
 
   """
 
+  if not limit:
+    limit = 100
+
   messages = account.message_as_recipient.order_by(order_by)
 
   if not request.GET.get('include_archive', False):
     messages = messages.filter(archived_at=None)
 
-  return render_template('messages', {'messages' : messages})
+  return render_template('messages', {'messages' : messages[:limit]})
 
 
 def account_inbox_message(request, account, message_id):
@@ -299,12 +302,16 @@ def account_sent(request, account, limit, offset, status, order_by):
   Will return :http:statuscode:`200` with a list of messages on success.
 
   """
+
+  if not limit:
+    limit = 100
+
   messages = account.message_as_sender.order_by(order_by)
 
   if not request.GET.get('include_archive', False):
     messages = messages.filter(sent_archived_at=None)
 
-  return render_template('messages', {'messages' : messages, 'sent_view' : True})
+  return render_template('messages', {'messages' : messages[:limit], 'sent_view' : True})
 
 def account_sent_message_archive(request, account, message_id):
   """ Archive a sent message.
