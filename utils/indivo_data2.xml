@@ -1,0 +1,17 @@
+<bootstrap>
+  <document_schemas>
+    <document_schema type='http://indivo.org/vocab/documentrels#triggeredHealthActionResult' />
+    <document_schema type='http://indivo.org/vocab/documentrels#measurement' />
+    <document_schema type='http://indivo.org/vocab/documentrels#healthActionSchedule' />
+    <document_schema type='http://indivo.org/vocab/documentrels#unscheduledResult' />
+    <document_schema type='http://indivo.org/vocab/documentrels#titrationDecision' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#HealthActionSchedule' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#HealthActionOccurrence' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#Device' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#AdherenceItem' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#HealthMeasurement' />
+    <document_schema type='http://indivo.org/vocab/xml/documents#MedicationSchedule' />
+    <document_schema type='http://indivo.org/vocab/xml/documents/healthActionPlan#HealthActionPlan' />
+    <document_schema type='http://indivo.org/vocab/xml/documents/healthActionResult#HealthActionResult' />
+  </document_schemas>
+</bootstrap>

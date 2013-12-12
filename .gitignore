@@ -10,5 +10,6 @@ indivo_ui/static/indivo_client/resources/images*
 settings.py
 genepartnership/
 doc/sphinx/build/
+codingsystems/data/complete
 .DS_Store
 
